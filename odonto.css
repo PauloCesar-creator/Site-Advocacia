@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    /* Substitua 'fundo.jpg' pelo nome do seu arquivo */
+    background-image: url('./img/fundo-odonto.png');
+    background-size: cover;
+    /* Faz a imagem cobrir a tela toda */
+    background-position: center;
+    /* Centraliza a foto */
+    background-attachment: fixed;
+    /* Opcional: a imagem fica parada ao rolar */
+    height: 100vh;
+}
+.mascara-fundo {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    z-index: -4;
+    
+    background: linear-gradient(180deg,rgba(10, 12, 16, 0.28) 0%, rgba(10, 12, 16, 1) 0%, rgba(10, 12, 16, 0.23) 94%);
+
+    }
+
+
+/* Cabeçalho*/
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(to bottom,
+            rgba(0, 188, 212, 0.9) 0%,
+            /* #00BCD4 com 90% de opacidade */
+            rgba(38, 198, 218, 0.6) 50%,
+            /* #26C6DA com 60% de opacidade */
+            rgba(255, 255, 255, 0) 100%)
+        /* Totalmente transparente no final */
+
+}
+
+.logo {
+    width: 250px;
+    /* Ajuste o tamanho conforme necessário */
+    height: auto;
+}
+
+.header a {
+    color:white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.header a:hover {
+    color: #007BFF;
+    transition: 0.3s ease-in-out;
+    font-size: 26px;
+}
+
+.header button {
+    padding: 5px;
+    background: linear-gradient(rgba(0, 188, 212, 0.9) 100%
+            /* #00BCD4 com 90% de opacidade na base */
+        );
+        color: white;
+    border-radius: 5px;
+    font-size: 24px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    margin-left: 500px;
+    margin-bottom: 10px;
+}
+
+.header button:hover {
+    font-size: 26px;
+    transition: 0.2s ease-in-out;
+}
+
+
+.nav {
+    display: flex;
+    gap: 30px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333333;
+    /* Cor profissional para o texto */
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: #008B8B;
+    /* Cor de destaque ao passar o mouse */
+}
+
+/* Botão de ação (Call to Action) */
+.cta-button {
+    background-color: #004A7C;
+    /* Cor Marinho Profundo profissional sugerida */
+    color: #ffffff;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+    background-color: #003355;
+    transform: scale(1.05);
+    /* Efeito de destaque ao passar o mouse */
+}
+
+/* --- NOVAS SEÇÕES DO CORPO DO SITE --- */
+
+/* Margem superior para compensar o cabeçalho fixo */
+.main-content {
+    margin-top: 150px;
+    padding: 50px 10%;
+}
+
+/* Seção Hero/Introdução */
+.hero-section {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.hero-section h1 {
+    font-size: 3em;
+    color: #008B8B;
+    margin-bottom: 20px;
+    border: 1px white solid;
+    border-radius: 10px;
+}
+
+.hero-section p {
+    color: white;
+    font-size: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Seção de Informações Minimalistas (Grid) */
+.info-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+.info-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Fundo branco com leve transparência */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    /* Sombra leve e profissional */
+    text-align: center;
+}
+
+.info-card h3 {
+    color: #004A7C;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.info-card p {
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+/* Seção de Contato Minimalista */
+.area-de-contato {
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(38, 198, 218, 0.6) 50%,
+            rgba(0, 188, 212, 0.9) 100%);
+    width: 100%;
+    height: 200px;
+    position: relative;
+    top: 200px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.area-de-contato h2 {
+    color: #008B8B;
+    margin-bottom: 30px;
+}
+
+.area-de-contato p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.entre-em-contato {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    width: 50%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(180deg,rgba(237, 221, 83, 0.28) 0%, rgba(42, 121, 155, 1) 50%, rgba(237, 221, 83, 0.23) 100%);
+}
+    
+    
+
+
+.entre-em-contato p {
+    padding: 10px;
+    font-size: 30px;
+    width: 100%;
+    max-width: 50%;
+    margin-right: 0;
+    border-radius: 5px;
+    color: white;
+
+}
+
+.entre-em-contato .logo-whatsapp {
+    width: 100px;
+    height: auto;
+    margin-left: 0px;
+
+}
