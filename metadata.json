@@ -1,0 +1,6 @@
+{
+  "name": "Attorneyster",
+  "description": "Um site de advocacia premium e elegante para o escritório Attorneyster, com design de alta classe, tipografia refinada e seções sob medida.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
