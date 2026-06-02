@@ -15,7 +15,8 @@ import {
   ShieldCheck,
   Award,
   MapPin,
-  Calendar
+  Calendar,
+  Instagram
 } from 'lucide-react';
 import { Language, translations } from './types';
 import advogadosFoto from './assets/images/advogados-foto.jpeg';
@@ -116,10 +117,9 @@ export default function App() {
   const [activeMenu, setActiveMenu] = useState('home');
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
-    area: 'civil',
-    message: ''
+    cpf: '',
+    subject: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -141,10 +141,9 @@ export default function App() {
       setIsSubmitted(true);
       setFormData({
         name: '',
-        email: '',
         phone: '',
-        area: 'civil',
-        message: ''
+        cpf: '',
+        subject: ''
       });
     }, 1200);
   };
@@ -177,7 +176,18 @@ export default function App() {
           </div>
 
           {/* Quick Actions & Language Switcher */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <a 
+              href="https://www.instagram.com/dogimar.advocacia?igsh=MXU1bWh6ZmRrcTdlNw==" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-white/20 border border-white/20 rounded text-[10px] text-white font-medium hover:text-blue-100 transition-all cursor-pointer"
+              title="Siga-nos no Instagram"
+            >
+              <Instagram className="w-3 h-3 text-white/95" />
+              <span className="hidden sm:inline">Instagram</span>
+            </a>
+
             <div className="flex items-center gap-1.5 text-white bg-white/10 py-1 px-2.5 rounded border border-white/10 animate-pulse-slow">
               <Award className="w-3 h-3 text-white/90" />
               <span className="text-[10px] tracking-widest font-medium uppercase">
@@ -548,6 +558,15 @@ export default function App() {
           <p className="text-sm font-medium text-slate-705 font-mono tracking-wide">
             (62) 9 8222-3911 / 3321-4895
           </p>
+          <a 
+            href="https://www.instagram.com/dogimar.advocacia?igsh=MXU1bWh6ZmRrcTdlNw==" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="flex items-center gap-1.5 text-xs text-[#15408C]/90 hover:text-[#15408C] font-sans font-medium transition-colors mt-2"
+          >
+            <Instagram className="w-3.5 h-3.5" />
+            <span>@dogimar.advocacia</span>
+          </a>
         </motion.div>
 
         <motion.div 
@@ -619,12 +638,12 @@ export default function App() {
                 <Award className="w-5 h-5" />
               </div>
               <h3 className="font-serif text-lg font-semibold text-slate-800 mb-3">
-                {lang === 'pt' ? 'Altíssima Reputação' : 'High Reputation'}
+                {lang === 'pt' ? 'Compromisso com Resultados' : 'Commitment to Results'}
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-light font-sans">
                 {lang === 'pt' 
-                  ? 'Consolidado como um dos escritórios de maior prestígio, com atuação destacada em tribunais de todo o país.' 
-                  : 'Established as one of the most prestigious law firms, with outstanding achievements across federal courts.'}
+                  ? 'Dedicação total à entrega de soluções jurídicas eficazes, com uma atuação técnica diferenciada e totalmente orientada ao êxito de suas causas.' 
+                  : 'Total dedication to delivering effective legal solutions, with distinguished technical performance fully oriented toward the success of your cases.'}
               </p>
             </motion.div>
 
@@ -762,7 +781,19 @@ export default function App() {
       {/* 6. IMMERSIVE COMPACT FOOTER */}
       <footer className="w-full bg-[#112954] border-t border-slate-200/20 py-10 text-xs text-slate-300">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p>© 2026 Paulo César. {lang === 'pt' ? 'Todos os direitos reservados.' : 'All rights reserved.'}</p>
+          <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+            <p>© 2026 Paulo César. {lang === 'pt' ? 'Todos os direitos reservados.' : 'All rights reserved.'}</p>
+            <a 
+              href="https://www.instagram.com/dogimar.advocacia?igsh=MXU1bWh6ZmRrcTdlNw==" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer sm:border-l sm:border-slate-200/20 sm:pl-4 pt-1 sm:pt-0"
+              title="Instagram Dogimar Advocacia"
+            >
+              <Instagram className="w-4 h-4 text-slate-400" />
+              <span className="font-sans">@dogimar.advocacia</span>
+            </a>
+          </div>
           <div className="flex gap-6 font-sans tracking-widest text-[10px] uppercase">
             <span className="hover:text-white cursor-pointer transition-colors">Termos de Uso</span>
             <span className="hover:text-white cursor-pointer transition-colors">Política de Privacidade</span>
@@ -848,20 +879,6 @@ export default function App() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-[11px] uppercase tracking-wider text-slate-600 mb-1.5 font-bold">
-                            {t.modal.email} *
-                          </label>
-                          <input 
-                            type="email" 
-                            name="email"
-                            required
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            placeholder="roberto@provedor.com"
-                            className="w-full bg-white border border-slate-200 focus:border-[#15408C] text-slate-800 placeholder-slate-400 px-4 py-2.5 rounded text-sm outline-none transition-colors shadow-sm"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[11px] uppercase tracking-wider text-slate-600 mb-1.5 font-bold">
                             {t.modal.phone} *
                           </label>
                           <input 
@@ -871,40 +888,47 @@ export default function App() {
                             value={formData.phone}
                             onChange={handleInputChange}
                             placeholder="(62) 98222-3911"
-                            className="w-full bg-white border border-slate-200 focus:border-[#15408C] text-slate-800 placeholder-slate-400 px-4 py-2.5 rounded text-sm outline-none transition-colors shadow-sm"
+                            className="w-full bg-white border border-slate-200 focus:border-[#15408C] text-slate-800 placeholder-slate-400 px-4 py-2.5 rounded text-sm outline-none transition-colors shadow-sm font-sans"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] uppercase tracking-wider text-slate-600 mb-1.5 font-bold">
+                            {t.modal.cpf} *
+                          </label>
+                          <input 
+                            type="text" 
+                            name="cpf"
+                            required
+                            value={formData.cpf}
+                            onChange={(e) => {
+                              let val = e.target.value.replace(/\D/g, "");
+                              if (val.length > 11) val = val.slice(0, 11);
+                              if (val.length > 9) {
+                                val = val.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+                              } else if (val.length > 6) {
+                                val = val.replace(/(\d{3})(\d{3})(\d{0,3})/, "$1.$2.$3");
+                              } else if (val.length > 3) {
+                                val = val.replace(/(\d{3})(\d{0,3})/, "$1.$2");
+                              }
+                              setFormData(prev => ({ ...prev, cpf: val }));
+                            }}
+                            placeholder="000.000.000-00"
+                            className="w-full bg-white border border-slate-200 focus:border-[#15408C] text-slate-800 placeholder-slate-400 px-4 py-2.5 rounded text-sm outline-none transition-colors shadow-sm font-mono"
                           />
                         </div>
                       </div>
 
                       <div>
                         <label className="block text-[11px] uppercase tracking-wider text-slate-600 mb-1.5 font-bold">
-                          {t.modal.area}
-                        </label>
-                        <select 
-                          name="area"
-                          value={formData.area}
-                          onChange={handleInputChange}
-                          className="w-full bg-white border border-slate-200 focus:border-[#15408C] text-slate-800 px-4 py-2.5 rounded text-sm outline-none transition-colors cursor-pointer shadow-sm"
-                        >
-                          <option value="civil">{lang === 'pt' ? 'Direito Civil / Contratos' : 'Civil Law & Contracts'}</option>
-                          <option value="business">{lang === 'pt' ? 'Direito Empresarial & Tributário' : 'Corporate & Tax Law'}</option>
-                          <option value="criminal">{lang === 'pt' ? 'Defesa Criminal de Elite' : 'Elite Criminal Defense'}</option>
-                          <option value="labor">{lang === 'pt' ? 'Direito Trabalhista Empresarial' : 'Employment & Labor'}</option>
-                          <option value="other">{lang === 'pt' ? 'Outra Família de Casos' : 'Other Case Types'}</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-[11px] uppercase tracking-wider text-slate-600 mb-1.5 font-bold">
-                          {t.modal.message} *
+                          {t.modal.subject} *
                         </label>
                         <textarea 
-                          name="message"
+                          name="subject"
                           required
                           rows={3}
-                          value={formData.message}
+                          value={formData.subject}
                           onChange={handleInputChange}
-                          placeholder={lang === 'pt' ? 'Gostaria de agendar uma consulta sobre...' : 'I would like to schedule a session regarding...'}
+                          placeholder={lang === 'pt' ? 'Ex: Gostaria de agendar uma consulta sobre aposentadoria...' : 'e.g. I would like to schedule a consultation regarding retirement...'}
                           className="w-full bg-white border border-slate-200 focus:border-[#15408C] text-slate-800 placeholder-slate-400 px-4 py-2.5 rounded text-sm outline-none transition-colors resize-none shadow-sm"
                         />
                       </div>

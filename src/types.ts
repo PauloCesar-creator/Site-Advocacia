@@ -30,10 +30,9 @@ export interface TranslationSet {
     title: string;
     subtitle: string;
     name: string;
-    email: string;
     phone: string;
-    area: string;
-    message: string;
+    cpf: string;
+    subject: string;
     submit: string;
     success: string;
     close: string;
@@ -71,10 +70,9 @@ export const translations: Record<Language, TranslationSet> = {
       title: "Agende sua Consulta",
       subtitle: "Preencha o formulário abaixo e um de nossos especialistas entrará em contato em menos de 2 horas.",
       name: "Nome Completo",
-      email: "E-mail de Contato",
       phone: "Telefone / WhatsApp",
-      area: "Área Jurídica de Interesse",
-      message: "Breve resumo do seu caso",
+      cpf: "CPF",
+      subject: "Assunto / Resumo do Caso",
       submit: "ENVIAR SOLICITAÇÃO",
       success: "Solicitação enviada com sucesso! Entraremos em contato em breve.",
       close: "Fechar",
@@ -110,10 +108,9 @@ export const translations: Record<Language, TranslationSet> = {
       title: "Book your Consultation",
       subtitle: "Fill out the form below and one of our experts will contact you within 2 hours.",
       name: "Full Name",
-      email: "Email Address",
       phone: "Phone / WhatsApp",
-      area: "Legal Area of Interest",
-      message: "Brief summary of your case",
+      cpf: "CPF Number",
+      subject: "Subject / Case Summary",
       submit: "SUBMIT REQUEST",
       success: "Request submitted successfully! We will get in touch shortly.",
       close: "Close",
