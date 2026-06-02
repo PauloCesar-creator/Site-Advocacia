@@ -114,6 +114,7 @@ const officesData: Record<'pt' | 'en', Office[]> = {
 export default function App() {
   const [lang, setLang] = useState<Language>('pt');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState('home');
   const [formData, setFormData] = useState({
     name: '',
@@ -155,367 +156,360 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-800 font-sans selection:bg-[#15408C] selection:text-white overflow-x-hidden">
       
-      {/* 1. TOP UTILITY BAR */}
-      <div className="w-full bg-[#15408C] border-b border-white/10 py-2.5 text-[11px] text-white/95">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-2">
+      {/* 1. HERO WRAPPER - IMMERSIVE PHOTO BACKGROUND HOUSING HEADER AND THE MAIN CENTRAL BADGE */}
+      <section id="home" className="relative min-h-screen flex flex-col justify-between items-center text-white bg-[#0A0D14] overflow-hidden">
+        
+        {/* Background Image Container with Deep Premium Vignette Overlay - Highly visible lawyers */}
+        <div className="absolute inset-0 z-0 select-none pointer-events-none">
+          <img 
+            src={advogadosFoto} 
+            alt="Advocacia Dogimar Gomes dos Santos" 
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover object-[center_12%] sm:object-[center_14%] md:object-[center_16%] lg:object-[center_18%] brightness-[0.72] contrast-[1.08]"
+          />
+          {/* Subtle overlay so text remains perfectly readable while making photo extremely clear */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14]/75 via-[#0A0D14]/12 to-[#0A0D14]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,#0A0D14_85%)]" />
+        </div>
+
+        {/* FLOATING NAVBAR STRUCTURE - FLOATS AT THE TOP */}
+        <div className="w-full z-30 flex flex-col relative select-none">
           
-          {/* Contacts */}
-          <div className="flex flex-wrap justify-center items-center gap-6 font-sans tracking-wide">
-            <span className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer">
-              <Phone className="w-3 h-3 text-white/80" />
-              <span>{t.topBar.phone}</span>
-            </span>
-            <span className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer">
-              <Mail className="w-3 h-3 text-white/80" />
-              <span>{t.topBar.email}</span>
-            </span>
-            <span className="hidden sm:flex items-center gap-2 opacity-95">
-              <Clock className="w-3 h-3 text-white/80" />
-              <span>{t.topBar.schedule}</span>
-            </span>
+          {/* THE TOP NARROW UTILITY CONTACT LINE */}
+          <div className="w-full bg-black/45 backdrop-blur-xs border-b border-white/5 py-3 text-[10px] tracking-[0.18em]">
+            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-slate-350 font-medium font-sans">
+              
+              {/* Call Link - Left */}
+              <a href="tel:6233214895" className="flex items-center gap-2 hover:text-[#d4af37] transition-all cursor-pointer">
+                <Phone className="w-3.5 h-3.5 text-amber-500/90" />
+                <span className="font-mono text-[10.5px] font-medium">(62) 3321-4895</span>
+              </a>
+
+              {/* Email Link - Center */}
+              <a href="mailto:dogimaradv@hotmail.com" className="hidden sm:flex items-center gap-2 hover:text-[#d4af37] transition-all cursor-pointer">
+                <Mail className="w-3.5 h-3.5 text-amber-500/90" />
+                <span className="lowercase font-sans text-slate-400 font-light hover:text-white transition-colors">dogimaradv@hotmail.com</span>
+              </a>
+
+              {/* Action Language Button - Right */}
+              <button 
+                onClick={toggleLanguage}
+                className="flex items-center gap-1.5 hover:text-[#d4af37] transition-all cursor-pointer bg-white/5 py-1 px-2.5 rounded border border-white/10"
+                title="Swith Language / Alterar Idioma"
+              >
+                <Globe className="w-3 h-3 text-amber-500/95" />
+                <span>{lang === 'pt' ? 'EN' : 'PT'}</span>
+              </button>
+
+            </div>
           </div>
 
-          {/* Quick Actions & Language Switcher */}
-          <div className="flex items-center gap-3">
-            <a 
-              href="https://www.instagram.com/dogimar.advocacia?igsh=MXU1bWh6ZmRrcTdlNw==" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-white/20 border border-white/20 rounded text-[10px] text-white font-medium hover:text-blue-100 transition-all cursor-pointer"
-              title="Siga-nos no Instagram"
-            >
-              <Instagram className="w-3 h-3 text-white/95" />
-              <span className="hidden sm:inline">Instagram</span>
+          {/* MAIN NAVBAR LOGO AREA */}
+          <header className="w-full py-5 px-6 max-w-7xl mx-auto flex justify-between items-center bg-transparent border-b border-white/5">
+            
+            {/* Elegant Intersecting Monogram logo "DG" identical to corporate brand with neon bottom border */}
+            <a href="#home" className="flex items-center group cursor-pointer select-none" id="navbar-logo-link">
+              <div className="relative w-24 sm:w-28 h-14 sm:h-16 flex flex-col items-center justify-center pb-2 select-none">
+                {/* SVG holding the premium identical DG letter shapes */}
+                <div className="w-full h-full flex items-center justify-center overflow-hidden">
+                  <svg viewBox="0 0 160 102" className="w-[85%] h-[85%] transition-transform duration-300 group-hover:scale-105" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="goldGradNavbar" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FFFFFF" />
+                        <stop offset="30%" stopColor="#fefbf2" />
+                        <stop offset="70%" stopColor="#e8c96c" />
+                        <stop offset="100%" stopColor="#caaf59" />
+                      </linearGradient>
+                      <filter id="dropGlowNavbar" x="-10%" y="-10%" width="130%" height="130%">
+                        <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.75"/>
+                      </filter>
+                    </defs>
+                    <g filter="url(#dropGlowNavbar)" className="pointer-events-none">
+                      {/* Letter D */}
+                      <text 
+                        x="24" 
+                        y="80" 
+                        fontFamily="'Playfair Display', 'Didot', 'Georgia', serif" 
+                        fontSize="84" 
+                        fontWeight="600" 
+                        fill="url(#goldGradNavbar)"
+                      >
+                        D
+                      </text>
+                      {/* Letter G (Italic and starting right where D ends) */}
+                      <text 
+                        x="76" 
+                        y="85" 
+                        fontFamily="'Playfair Display', 'Didot', 'Georgia', serif" 
+                        fontSize="84" 
+                        fontWeight="500" 
+                        fontStyle="italic"
+                        fill="url(#goldGradNavbar)"
+                      >
+                        G
+                      </text>
+                    </g>
+                  </svg>
+                </div>
+                {/* Thin neon bottom flare matching image 2 and request */}
+                <div className="absolute bottom-1 w-16 h-[1px] bg-[#d4af37] shadow-[0_1px_8px_rgba(212,175,55,0.9)] transition-all duration-300 group-hover:w-20" />
+              </div>
             </a>
 
-            <div className="flex items-center gap-1.5 text-white bg-white/10 py-1 px-2.5 rounded border border-white/10 animate-pulse-slow">
-              <Award className="w-3 h-3 text-white/90" />
-              <span className="text-[10px] tracking-widest font-medium uppercase">
-                {lang === 'pt' ? 'Escritório de Elite' : 'Elite Legal Practice'}
-              </span>
-            </div>
-            
+            {/* Hamburger white toggle menu trigger */}
             <button 
-              onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-white/20 border border-white/20 rounded text-[10px] text-white font-medium tracking-wide transition-all active:scale-95 cursor-pointer"
-              title="Mudar Idioma / Switch Language"
+              onClick={() => setIsMenuOpen(true)}
+              className="p-1.5 rounded hover:bg-white/10 text-white hover:text-amber-400 transition-colors cursor-pointer"
+              aria-label="Menu"
             >
-              <Globe className="w-3 h-3" />
-              <span>{lang === 'pt' ? 'EN' : 'PT'}</span>
+              <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
             </button>
-          </div>
+
+          </header>
 
         </div>
-      </div>
 
-      {/* 2. MAIN HEADER & NAVIGATION */}
-      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+        {/* HERO CENTRAL BRAND BOX AREA - HOUSES MAIN SLOGANS (LOGO REPLACED AND TEXT RE-POSITIONED BELOW FACE LINE) */}
+        <div className="max-w-4xl mx-auto px-6 pt-[36vh] sm:pt-[40vh] md:pt-[44vh] lg:pt-[46vh] pb-24 flex flex-col items-center justify-center text-center relative z-10 select-none w-full">
           
-          {/* Logo / Brand */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3.5 group cursor-pointer"
+          {/* Spacer of identical dimensions to keep central text positions exactly unchanged while removing the monogram box */}
+          <div className="h-26 sm:h-30 mb-10 w-full pointer-events-none" />
+
+          {/* Main Display Headline name */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.15 }}
+            className="font-serif text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.2em] sm:tracking-[0.25em] text-[#faf6e8] leading-tight mb-2 select-text uppercase font-semibold"
           >
-            <div className="w-12 h-12 bg-[#15408C] border border-slate-200/25 rounded-[5px] group-hover:scale-105 transition-all duration-300 flex items-center justify-center overflow-hidden">
-              <img 
-                src={logoImg} 
-                alt="Logo" 
-                className="w-full h-full object-cover rounded-[5px] group-hover:scale-105 transition-transform duration-300" 
-                referrerPolicy="no-referrer"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-serif text-lg sm:text-xl tracking-[0.1em] font-normal text-slate-800 group-hover:text-[#15408C] transition-colors duration-300 leading-none uppercase">
-                DOGIMAR GOMES DOS SANTOS
-              </span>
-              <span className="text-[9px] tracking-[0.2em] text-[#15408C] mt-1.5 uppercase font-semibold">
-                {lang === 'pt' ? 'Advocacia e Consultoria Jurídica' : 'Law & Legal Consulting'}
-              </span>
+            DOGIMAR GOMES DOS SANTOS
+          </motion.h1>
+
+          {/* Subtle sub head */}
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35 }}
+            className="font-sans text-[10px] sm:text-xs text-amber-500 uppercase tracking-[0.3em] font-bold mb-8 select-text"
+          >
+            {lang === 'pt' ? 'ADVOCACIA E CONSULTORIA JURÍDICA' : 'LAW & LEGAL CONSULTING'}
+          </motion.p>
+
+          {/* Diamond Line element separator */}
+          <motion.div 
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 1, delay: 0.45 }}
+            className="w-full max-w-sm h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/65 to-transparent flex items-center justify-center mb-8 relative"
+          >
+            <div className="bg-[#0A0D14]/90 px-3 py-0.5 rounded text-amber-500 text-xs translate-y-[-0.5px]">
+              ◇
             </div>
           </motion.div>
 
-          {/* Navigation Links (Desktop) */}
-          <nav className="hidden md:flex items-center gap-8">
-            {[
-              { id: 'about', label: t.nav.about },
-              { id: 'services', label: t.nav.services },
-              { id: 'contact', label: t.nav.contact }
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  setActiveMenu(item.id);
-                  const el = document.getElementById(item.id === 'contact' ? 'contact' : item.id === 'about' ? 'details' : 'details');
-                  if (item.id === 'about') {
-                    document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' });
-                  } else if (item.id === 'services') {
-                    document.getElementById('unidades')?.scrollIntoView({ behavior: 'smooth' });
-                  } else if (item.id === 'contact') {
-                    setIsModalOpen(true);
-                  }
-                }}
-                className={`text-xs tracking-[0.22em] font-semibold uppercase transition-all relative py-2 cursor-pointer ${
-                  activeMenu === item.id ? 'text-[#15408C]' : 'text-slate-600 hover:text-[#15408C]'
-                }`}
-              >
-                {item.label}
-                {activeMenu === item.id && (
-                  <motion.div 
-                    layoutId="activeNavIndicator" 
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#15408C]"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </button>
-            ))}
-            
-            {/* Pages dropdown style */}
-            <div className="relative group cursor-pointer">
-              <span className="text-xs tracking-[0.22em] font-semibold uppercase text-slate-500 group-hover:text-[#15408C] flex items-center gap-1 transition-colors">
-                {lang === 'pt' ? 'Mídia' : 'Pages'}
-                <ChevronDown className="w-3 h-3 group-hover:rotate-180 transition-transform duration-300" />
-              </span>
-              <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-slate-200 rounded shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                <a href="#unidades" onClick={(e) => { e.preventDefault(); document.getElementById('unidades')?.scrollIntoView({ behavior: 'smooth' }) }} className="block px-4 py-2.5 text-xs text-slate-700 hover:bg-slate-50 hover:text-[#15408C] font-semibold tracking-wide">
-                  {lang === 'pt' ? 'Nossas Unidades' : 'Our Branches'}
-                </a>
-                <a href="#sobre" onClick={(e) => { e.preventDefault(); document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' }) }} className="block px-4 py-2.5 text-xs text-slate-700 hover:bg-slate-50 hover:text-[#15408C] font-semibold tracking-wide">
-                  {lang === 'pt' ? 'Nossos Valores' : 'Our Principles'}
-                </a>
-              </div>
-            </div>
-          </nav>
+          {/* Excelencia | Tradicao | Confianca alignment */}
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.55 }}
+            className="font-sans text-[10.5px] sm:text-xs text-[#d1c3a7] tracking-[0.35em] sm:tracking-[0.45em] font-semibold uppercase mb-10 text-center"
+          >
+            {lang === 'pt' ? (
+              <>EXCELÊNCIA <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRADIÇÃO <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> CONFIANÇA</>
+            ) : (
+              <>EXCELLENCE <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRADITION <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRUST</>
+            )}
+          </motion.p>
 
-          {/* CTA Consultation Button */}
-          <div className="flex items-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => setIsModalOpen(true)}
-              className="relative hidden sm:inline-flex items-center justify-center px-6 py-3 border-2 border-[#15408C] bg-[#15408C] hover:bg-[#11316B] text-white text-xs tracking-[0.18em] font-bold uppercase transition-all duration-300 cursor-pointer rounded-[4px] shadow-sm hover:shadow-md"
-            >
-              {t.nav.cta}
-            </motion.button>
-            
-            {/* Mobile menu trigger */}
+          {/* Beautiful text: Há mais de 27 anos defendendo direitos com excelência... */}
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2, delay: 0.65 }}
+            className="font-serif text-[#ebe3cd] text-base sm:text-lg lg:text-xl font-light italic leading-relaxed max-w-2xl mb-12 select-text"
+          >
+            {lang === 'pt' ? (
+              <>
+                Há mais de <strong className="font-bold text-amber-400 not-italic">27 anos</strong> defendendo direitos com excelência e dedicação.
+              </>
+            ) : (
+              <>
+                For over <strong className="font-bold text-amber-400 not-italic">27 years</strong> defending rights with excellence and dedication.
+              </>
+            )}
+          </motion.p>
+
+          {/* Premium clear button CTA with balance scale symbol */}
+          <motion.div 
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex flex-col items-center"
+          >
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="sm:hidden p-2 text-[#15408C] hover:bg-slate-50 rounded border border-slate-200"
+              className="px-8 sm:px-10 py-5 bg-transparent border border-[#d4af37]/80 hover:bg-[#d4af37]/10 text-[#d4af37] font-sans font-medium text-xs sm:text-sm uppercase tracking-[0.22em] transition-all duration-300 rounded shadow-[0_4px_25px_rgba(212,175,55,0.03)] flex items-center gap-3 active:scale-95 cursor-pointer font-bold hover:shadow-[0_4px_35px_rgba(212,175,55,0.12)] hover:border-[#d4af37]"
             >
-              <Phone className="w-4 h-4" />
+              <Scale className="w-5 h-5 text-[#d4af37]" />
+              <span>{lang === 'pt' ? 'FALAR COM UM ESPECIALISTA' : 'TALK TO A SPECIALIST'}</span>
             </button>
-          </div>
+          </motion.div>
 
         </div>
-      </header>
 
-      {/* 3. HERO / IMAGE SECTION - SIDE-BY-SIDE PLATINUM LAYOUT */}
-      <section className="relative min-h-[calc(100vh-120px)] flex flex-col lg:flex-row items-stretch overflow-hidden bg-white border-b border-slate-200/80">
-        
-        {/* Left Column: Content */}
-        <div className="lg:w-1/2 w-full flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-16 lg:py-24 relative z-15">
-          <div className="max-w-2xl mx-auto lg:mx-0">
-            
-            {/* Decorative Blue Bar */}
-            <motion.div 
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={{ opacity: 1, scaleX: 1 }}
-              transition={{ duration: 0.8 }}
-              className="w-20 h-[3.5px] bg-[#15408C] mb-8 origin-left"
+        {/* Elegant physical wave curve transition exactly mimicking the design picture */}
+        <div className="absolute inset-x-0 bottom-0 z-20 pointer-events-none translate-y-[2px]">
+          <svg viewBox="0 0 1440 120" fill="none" className="w-full h-auto select-none">
+            <path 
+              d="M0,80 Q720,135 1440,80 L1440,120 L0,120 Z" 
+              fill="#F8FAFC" 
             />
-
-            {/* Core Elegant Headline with Italic Elements */}
-            <motion.h1 
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-slate-800 leading-tight mb-8 tracking-wide"
-            >
-              {lang === 'pt' ? (
-                <>
-                  Excelência e <span className="font-semibold italic text-[#15408C]">Tradição Jurídica</span>
-                </>
-              ) : (
-                <>
-                  Excellence and <span className="font-semibold italic text-[#15408C]">Legal Tradition</span>
-                </>
-              )}
-            </motion.h1>
-
-            {/* The multi-paragraph requested text blocks */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="space-y-4 max-w-2xl font-sans text-slate-700/90 text-[13.5px] sm:text-sm leading-relaxed mb-8 font-light"
-            >
-              {lang === 'pt' ? (
-                <>
-                  <p>
-                    Há mais de 27 anos, o escritório <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> atua com compromisso, dedicação e excelência na defesa dos direitos da population de Anápolis e região.
-                  </p>
-                  <p>
-                    Nossa história foi construída através da confiança de clientes que encontraram em nosso trabalho um atendimento sério, humanizado e especializado, sempre buscando soluções eficientes para cada situação.
-                  </p>
-                  <p>
-                    Somos referência na atuação em <strong className="font-bold text-[#15408C]">Direito Previdenciário</strong>, auxiliando diariamente pessoas que tiveram benefícios negados ou indeferidos pelo INSS, além de atuar em demandas envolvendo aposentadorias, pensão por morte, salário-maternidade, auxílio-doença, auxílio-acidente, BPC/LOAS e demais benefícios previdenciários.
-                  </p>
-                  <p>
-                    Também prestamos atendimento especializado nas áreas <strong className="font-bold text-[#15408C]">trabalhista, cível e agrária</strong>, sempre prezando pela qualidade dos serviços prestados, responsabilidade profissional e dedicação em cada causa assumida.
-                  </p>
-                  <p>
-                    Ao longo desses anos, entendemos que cada processo representa muito mais do que documentos e procedimentos jurídicos. Por trás de cada demanda existe uma história, uma família e direitos que precisam ser respeitados e defendidos.
-                  </p>
-                  <p>
-                    Por isso, seguimos atuando com transparência, experiência e compromisso, buscando oferecer segurança jurídica e um atendimento próximo para cada cliente que deposita sua confiança em nosso escritório.
-                  </p>
-                  <p className="border-l-2 border-[#15408C] pl-4 py-1 italic font-semibold text-[#15408C] text-sm sm:text-base mt-6">
-                    Dogimar Gomes dos Santos — tradição, experiência e dedicação há mais de 27 anos.
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p>
-                    For over 27 years, <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> law firm has acted with commitment, dedication, and excellence in defending the rights of the people of Anápolis and its surrounding region.
-                  </p>
-                  <p>
-                    Our history was built upon the trust of clients who found in our work a serious, humanized, and highly specialized representation, always looking for efficient solutions in every single scenario.
-                  </p>
-                  <p>
-                    We are a benchmark in <strong className="font-bold text-[#15408C]">Social Security Law</strong>, helping individuals daily whose benefits were denied or rejected by the INSS, additionally handling retirements, survivor pensions, maternity allowances, disability benefits, accident aid, BPC/LOAS, and other social welfare demands.
-                  </p>
-                  <p>
-                    We also deliver specialized legal advice in the <strong className="font-bold text-[#15408C]">labor, civil, and agrarian</strong> fields, always valuing the premium quality of our practices, professional responsibility, and devotion to every case we take on.
-                  </p>
-                  <p>
-                    Throughout these years, we have come to understand that each lawsuit represents far more than just documents and bureaucratic court proceedings. Behind each claim is a real story, a family, and fundamental rights that demand respect and defense.
-                  </p>
-                  <p>
-                    Thus, we continue to serve with transparency, solid experience, and absolute commitment, aiming to provide outstanding legal security and highly personal guidance to every client who places their trust in our firm.
-                  </p>
-                  <p className="border-l-2 border-[#15408C] pl-4 py-1 italic font-semibold text-[#15408C] text-sm sm:text-base mt-6">
-                    Dogimar Gomes dos Santos — tradition, experience, and dedication for over 27 years.
-                  </p>
-                </>
-              )}
-            </motion.div>
-
-            {/* Gorgeous Action Trigger Buttons */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-wrap items-center gap-4 mb-12"
-            >
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="px-8 py-4 bg-[#15408C] hover:bg-[#11316B] text-white font-sans font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer rounded"
-              >
-                <span>{t.nav.cta}</span>
-                <ArrowRight className="w-3.5 h-3.5 text-white/90" />
-              </button>
-
-              <button 
-                onClick={() => {
-                  const element = document.getElementById('details');
-                  element?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="px-8 py-4 border border-slate-350 hover:border-[#15408C] font-sans font-bold text-xs uppercase tracking-widest text-[#333] hover:text-[#15408C] hover:bg-slate-50 transition-all duration-300 cursor-pointer rounded"
-              >
-                {lang === 'pt' ? 'Ver Atuação' : 'Our Practice'}
-              </button>
-            </motion.div>
-
-            {/* Dynamic statistics row */}
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.7 }}
-              className="border-t border-slate-200/80 pt-8 flex"
-            >
-              <div className="flex flex-col">
-                <span className="font-serif text-3xl sm:text-4xl text-[#15408C] font-semibold tracking-tight mb-0.5">
-                  {t.stats.years.value}
-                </span>
-                <span className="text-[10px] text-slate-500 tracking-widest uppercase font-semibold font-sans">
-                  {t.stats.years.label}
-                </span>
-              </div>
-            </motion.div>
-
-          </div>
-        </div>
-
-        {/* Right Column: Visual Frame featuring Lawyer Team Photo */}
-        <div className="lg:w-1/2 w-full flex flex-col justify-between relative bg-white overflow-hidden">
+          </svg>
           
-          {/* Visual Image container - Height optimized for beautiful aspect ratio on mobile & tablet, preventing cropping */}
-          <div className="relative w-full h-[450px] sm:h-[550px] md:h-[600px] lg:h-full min-h-[450px] lg:min-h-[580px] overflow-hidden">
-            <motion.img 
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.6, ease: "easeOut" }}
-              src={advogadosFoto} 
-              alt="Advocacia Dogimar Gomes dos Santos" 
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover object-[center_18%] sm:object-[center_22%] md:object-center pointer-events-none filter brightness-[0.99] contrast-[1.01]"
-            />
-            {/* Pure Edge Masks: No radial/general blur over the center of the image. The team is 100% visible and extremely crisp. */}
-            {/* Soft fade-out edges on the left and right */}
-            <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white/90 via-white/20 to-transparent z-10 pointer-events-none opacity-40" />
-            <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white/90 via-white/20 to-transparent z-10 pointer-events-none opacity-40" />
-            {/* Soft fade-out edges on the top and bottom */}
-            <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white/90 via-white/20 to-transparent z-10 pointer-events-none opacity-40" />
-            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white/95 via-white/20 to-transparent z-10 pointer-events-none opacity-50" />
-            
-            {/* Thin Aesthetic Blue Frame overlay on the visual area */}
-            <div className="absolute top-5 left-5 right-5 bottom-5 border border-[#15408C]/12 z-20 pointer-events-none hidden sm:block rounded" />
+          {/* Animated golden arrow sitting on the peak of the curve */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center justify-center p-2 rounded-full cursor-pointer hover:bg-slate-100 transition-colors pointer-events-auto"
+               onClick={() => document.getElementById('historia')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            <ChevronDown className="w-6 h-6 text-[#d4af37] animate-bounce" />
           </div>
-
-          {/* OAB Credentials list - Side on desktop (top-1/2 absolute translation), below on mobile (standard layout flow) */}
-          <div className="lg:absolute lg:right-6 lg:bottom-6 w-full lg:w-[290px] p-6 lg:bg-white/95 lg:backdrop-blur-md lg:border lg:border-slate-200 lg:rounded-lg lg:shadow-[0_20px_50px_rgba(0,0,0,0.05)] z-30 bg-[#F8FAFC]/95 border-t border-slate-200 border-l-4 border-l-[#15408C] select-none text-left">
-            <h3 className="font-serif text-[10px] tracking-[0.25em] uppercase text-[#15408C] mb-4 font-bold border-b border-slate-100 pb-2">
-              {lang === 'pt' ? 'Corpo Jurídico' : 'Legal Members'}
-            </h3>
-            
-            <div className="space-y-4">
-              <div className="flex flex-col group">
-                <span className="text-slate-800 font-serif text-[13px] font-semibold tracking-wide group-hover:text-[#15408C] transition-colors duration-200">
-                  Pedro Lucas Nogueira dos Santos
-                </span>
-                <span className="text-[10px] text-slate-500 font-mono mt-0.5">
-                  OAB/GO 76.522
-                </span>
-              </div>
-
-              <div className="flex flex-col group border-t border-slate-100 pt-3">
-                <span className="text-slate-800 font-serif text-[13px] font-semibold tracking-wide group-hover:text-[#15408C] transition-colors duration-200">
-                  Dogimar Gomes dos Santos
-                </span>
-                <span className="text-[10px] text-slate-500 font-mono mt-0.5">
-                  OAB/GO 17.792
-                </span>
-              </div>
-
-              <div className="flex flex-col group border-t border-slate-100 pt-3">
-                <span className="text-slate-800 font-serif text-[13px] font-semibold tracking-wide group-hover:text-[#15408C] transition-colors duration-200">
-                  Isadora Nogueira dos Santos
-                </span>
-                <span className="text-[10px] text-slate-500 font-mono mt-0.5">
-                  OAB/GO 64.126
-                </span>
-              </div>
-            </div>
-          </div>
-
         </div>
 
       </section>
 
-      {/* 4. KEY METADATA SUMMARY GRID BAR */}
+      {/* 2. DETAILED HISTORY & DIRECT BIO SECTION (Replaced side-by-side with beautiful text flow) */}
+      <section id="historia" className="relative bg-[#F8FAFC] py-24 px-6 sm:px-12 lg:px-20 border-b border-slate-200/50">
+        
+        {/* Soft luxury glow background lights */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-blue-50/15 rounded-full filter blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-50/10 rounded-full filter blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Left Block: Complete set of 6 paragraphs with full unmodified reading structure */}
+            <div className="lg:col-span-8 space-y-6">
+              
+              <div className="flex flex-col mb-6">
+                <span className="text-xs uppercase tracking-[0.3em] text-[#15408C] font-bold mb-2 block font-sans">
+                  {lang === 'pt' ? 'Quem Somos' : 'Legal Counsel & Firm History'}
+                </span>
+                <h2 className="font-serif text-3xl sm:text-4xl font-light text-slate-800 leading-tight">
+                  {lang === 'pt' ? (
+                    <>
+                      Tradição, <span className="font-semibold italic text-[#15408C]">Experiência</span> e Compromisso
+                    </>
+                  ) : (
+                    <>
+                      Tradition, <span className="font-semibold italic text-[#15408C]">Experience</span> & Commitment
+                    </>
+                  )}
+                </h2>
+                <div className="w-16 h-[3px] bg-[#15408C] mt-4" />
+              </div>
+
+              {/* Original unmodified text blocks */}
+              <div className="space-y-5 text-slate-700 font-sans text-[13.5px] sm:text-[14.5px] leading-relaxed font-light text-left">
+                {lang === 'pt' ? (
+                  <>
+                    <p>
+                      Há mais de 27 anos, o escritório <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> atua com compromisso, dedicação e excelência na defesa dos direitos da população de Anápolis e região.
+                    </p>
+                    <p>
+                      Nossa história foi construída através da confiança de clientes que encontraram em nosso trabalho um atendimento sério, humanizado e especializado, sempre buscando soluções eficientes para cada situação.
+                    </p>
+                    <p>
+                      Somos referência na atuação em <strong className="font-bold text-[#15408C]">Direito Previdenciário</strong>, auxiliando diariamente pessoas que tiveram benefícios negados ou indeferidos pelo INSS, além de atuar em demandas envolvendo aposentadorias, pensão por morte, salário-maternidade, auxílio-doença, auxílio-acidente, BPC/LOAS e demais benefícios previdenciários.
+                    </p>
+                    <p>
+                      Também prestamos atendimento especializado nas áreas <strong className="font-bold text-[#15408C]">trabalhista, cível e agrária</strong>, sempre prezando pela qualidade dos serviços prestados, responsabilidade profissional e dedicação em cada causa assumida.
+                    </p>
+                    <p>
+                      Ao longo desses anos, entendemos que cada processo representa muito mais do que documentos e procedimentos jurídicos. Por trás de cada demanda existe uma história, uma família e direitos que precisam ser respeitados e defendidos.
+                    </p>
+                    <p>
+                      Por isso, seguimos atuando com transparência, experiência e compromisso, buscando oferecer segurança jurídica e um atendimento próximo para cada cliente que deposita sua confiança em nosso escritório.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p>
+                      For over 27 years, <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> law firm has acted with commitment, dedication, and excellence in defending the rights of the people of Anápolis and its surrounding region.
+                    </p>
+                    <p>
+                      Our history was built upon the trust of clients who found in our work a serious, humanized, and highly specialized representation, always looking for efficient solutions in every single scenario.
+                    </p>
+                    <p>
+                      We are a benchmark in <strong className="font-bold text-[#15408C]">Social Security Law</strong>, helping individuals daily whose benefits were denied or rejected by the INSS, additionally handling retirements, survivor pensions, maternity allowances, disability benefits, accident aid, BPC/LOAS, and other social welfare demands.
+                    </p>
+                    <p>
+                      We also deliver specialized legal advice in the <strong className="font-bold text-[#15408C]">labor, civil, and agrarian</strong> fields, always valuing the premium quality of our practices, professional responsibility, and devotion to every case we take on.
+                    </p>
+                    <p>
+                      Throughout these years, we have come to understand that each lawsuit represents far more than just documents and bureaucratic court proceedings. Behind each claim is a real story, a family, and fundamental rights that demand respect and defense.
+                    </p>
+                    <p>
+                      Thus, we continue to serve with transparency, solid experience, and absolute commitment, aiming to provide outstanding legal security and highly personal guidance to every client who places their trust in our firm.
+                    </p>
+                  </>
+                )}
+              </div>
+
+            </div>
+
+            {/* Right Block: OAB legal credentials and members lists */}
+            <div className="lg:col-span-4 lg:sticky lg:top-24 bg-white border border-slate-200/80 rounded-xl p-6 shadow-[0_12px_40px_rgba(0,0,0,0.03)] border-l-4 border-l-[#15408C]">
+              <h3 className="font-serif text-[10.5px] tracking-[0.25em] uppercase text-[#15408C] mb-6 font-bold border-b border-slate-100 pb-3">
+                {lang === 'pt' ? 'Corpo Jurídico Residente' : 'Active Legal Council'}
+              </h3>
+              
+              <div className="space-y-4 text-left">
+                <div className="flex flex-col group">
+                  <span className="text-slate-800 font-serif text-[13px] font-semibold tracking-wide group-hover:text-[#15408C] transition-colors duration-200">
+                    Pedro Lucas Nogueira dos Santos
+                  </span>
+                  <span className="text-[10px] text-[#15408C] font-mono mt-0.5 font-bold">
+                    OAB/GO 76.522
+                  </span>
+                </div>
+
+                <div className="flex flex-col group border-t border-slate-100 pt-3">
+                  <span className="text-slate-800 font-serif text-[13px] font-semibold tracking-wide group-hover:text-[#15408C] transition-colors duration-200">
+                    Dogimar Gomes dos Santos
+                  </span>
+                  <span className="text-[10px] text-[#15408C] font-mono mt-0.5 font-bold">
+                    OAB/GO 17.792
+                  </span>
+                </div>
+
+                <div className="flex flex-col group border-t border-slate-100 pt-3">
+                  <span className="text-slate-800 font-serif text-[13px] font-semibold tracking-wide group-hover:text-[#15408C] transition-colors duration-200">
+                    Isadora Nogueira dos Santos
+                  </span>
+                  <span className="text-[10px] text-[#15408C] font-mono mt-0.5 font-bold">
+                    OAB/GO 64.126
+                  </span>
+                </div>
+              </div>
+              
+              <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col">
+                <button 
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full py-3 bg-[#15408C] hover:bg-[#11316B] text-white font-sans font-bold text-xs uppercase tracking-widest transition-all duration-300 rounded cursor-pointer shadow-sm hover:shadow-md"
+                >
+                  {lang === 'pt' ? 'SOLICITAR CONSULTA' : 'REQUEST CONSULTATION'}
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* 3. KEY METADATA SUMMARY STICKY GRID BAR */}
       <section className="grid grid-cols-1 md:grid-cols-3 border-b border-slate-200 bg-white overflow-hidden">
         
         <button 
@@ -529,7 +523,7 @@ export default function App() {
           <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-[#15408C] opacity-75 group-hover:opacity-100 transition-opacity duration-300" />
           
           <div className="flex items-center justify-between w-full mb-1.5">
-            <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#15408C] font-semibold flex items-center gap-1.5 transition-colors">
+            <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#15408C] font-semibold flex items-center gap-1.5 transition-colors font-bold">
               {lang === 'pt' ? 'Unidades em Goiás' : 'Offices in Goiás'} 
               <span className="text-[10px] bg-blue-100/80 text-[#15408C] px-2 py-0.5 rounded-full font-sans font-bold leading-none">6</span>
             </p>
@@ -545,13 +539,7 @@ export default function App() {
           </p>
         </button>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-          className="px-8 sm:px-12 py-8 border-r border-slate-150 flex flex-col justify-center"
-        >
+        <div className="px-8 sm:px-12 py-8 border-r border-slate-150 flex flex-col justify-center text-left">
           <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#15408C] mb-1.5 font-bold">
             {lang === 'pt' ? 'Atendimento Direto' : 'Direct Support'}
           </p>
@@ -565,24 +553,18 @@ export default function App() {
             className="flex items-center gap-1.5 text-xs text-[#15408C]/90 hover:text-[#15408C] font-sans font-medium transition-colors mt-2"
           >
             <Instagram className="w-3.5 h-3.5" />
-            <span>@dogimar.advocacia</span>
+            <span>Instagram</span>
           </a>
-        </motion.div>
+        </div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="px-8 sm:px-12 py-8 flex flex-col justify-center"
-        >
+        <div className="px-8 sm:px-12 py-8 flex flex-col justify-center text-left">
           <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#15408C] mb-1.5 font-bold">
             {lang === 'pt' ? 'Áreas Principais' : 'Core Disciplines'}
           </p>
           <p className="text-sm font-light text-slate-600 font-sans tracking-wide leading-relaxed">
             {lang === 'pt' ? 'Previdenciário, trabalhista, civil e agrário' : 'Social security, labor, civil and agrarian law'}
           </p>
-        </motion.div>
+        </div>
 
       </section>
 
@@ -791,7 +773,7 @@ export default function App() {
               title="Instagram Dogimar Advocacia"
             >
               <Instagram className="w-4 h-4 text-slate-400" />
-              <span className="font-sans">@dogimar.advocacia</span>
+              <span className="font-sans">Instagram</span>
             </a>
           </div>
           <div className="flex gap-6 font-sans tracking-widest text-[10px] uppercase">
@@ -981,6 +963,148 @@ export default function App() {
                   </motion.div>
                 )}
               </AnimatePresence>
+
+            </motion.div>
+
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* 7. SLIDE-OUT MOBILE MENU DRAWER */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <div className="fixed inset-0 z-50 overflow-hidden">
+            
+            {/* Semi-transparent backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute inset-0 bg-[#06080F]/90 backdrop-blur-md"
+            />
+
+            {/* Drawer content */}
+            <motion.div 
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: "spring", damping: 24, stiffness: 190 }}
+              className="absolute inset-y-0 right-0 w-full max-w-sm bg-[#0B0D14] border-l border-white/5 shadow-2xl p-8 flex flex-col justify-between z-10"
+            >
+              <div>
+                {/* Header */}
+                <div className="flex items-center justify-between pb-8 border-b border-white/5 mb-8">
+                  {/* Elegant corporate monogram with neon bottom border inside mobile drawer */}
+                  <div className="relative w-20 h-11 flex flex-col items-center justify-center pb-1.5 select-none">
+                    <div className="w-full h-full flex items-center justify-center overflow-hidden">
+                      <svg viewBox="0 0 160 102" className="w-[85%] h-[85%]" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                          <linearGradient id="goldGradMenu" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#FFFFFF" />
+                            <stop offset="30%" stopColor="#fefbf2" />
+                            <stop offset="70%" stopColor="#e8c96c" />
+                            <stop offset="100%" stopColor="#caaf59" />
+                          </linearGradient>
+                          <filter id="dropGlowMenu" x="-10%" y="-10%" width="130%" height="130%">
+                            <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.75"/>
+                          </filter>
+                        </defs>
+                        <g filter="url(#dropGlowMenu)" className="pointer-events-none">
+                          <text 
+                            x="24" 
+                            y="80" 
+                            fontFamily="'Playfair Display', 'Didot', 'Georgia', serif" 
+                            fontSize="84" 
+                            fontWeight="600" 
+                            fill="url(#goldGradMenu)"
+                          >
+                            D
+                          </text>
+                          <text 
+                            x="76" 
+                            y="85" 
+                            fontFamily="'Playfair Display', 'Didot', 'Georgia', serif" 
+                            fontSize="84" 
+                            fontWeight="500" 
+                            fontStyle="italic"
+                            fill="url(#goldGradMenu)"
+                          >
+                            G
+                          </text>
+                        </g>
+                      </svg>
+                    </div>
+                    {/* Thin neon bottom flare matching image 2 and request */}
+                    <div className="absolute bottom-0 w-12 h-[1px] bg-[#d4af37] shadow-[0_1px_6px_rgba(212,175,55,0.85)]" />
+                  </div>
+                  <button 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="p-1 px-2 text-slate-400 hover:text-white transition-colors cursor-pointer"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                {/* Nav Links */}
+                <nav className="flex flex-col gap-6">
+                  <button 
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      document.getElementById('historia')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="text-left font-serif text-lg text-slate-300 hover:text-amber-400 transition-colors py-1 cursor-pointer"
+                  >
+                    {lang === 'pt' ? 'Nossa História' : 'Our Story'}
+                  </button>
+
+                  <button 
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="text-left font-serif text-lg text-slate-300 hover:text-amber-400 transition-colors py-1 cursor-pointer"
+                  >
+                    {lang === 'pt' ? 'Atuação & Valores' : 'Practice & Values'}
+                  </button>
+
+                  <button 
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      document.getElementById('unidades')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="text-left font-serif text-lg text-slate-300 hover:text-amber-400 transition-colors py-1 cursor-pointer"
+                  >
+                    {lang === 'pt' ? 'Nossos Escritórios' : 'Our Branches'}
+                  </button>
+
+                  <button 
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsModalOpen(true);
+                    }}
+                    className="text-left font-serif text-lg text-amber-500 hover:text-amber-400 transition-colors py-1 font-bold cursor-pointer"
+                  >
+                    {lang === 'pt' ? 'Agendar Consulta' : 'Book Appointment'}
+                  </button>
+                </nav>
+              </div>
+
+              {/* Brand details and Instagram link at bottom of drawer */}
+              <div className="border-t border-white/5 pt-8 mt-auto flex flex-col gap-4">
+                <a 
+                  href="https://www.instagram.com/dogimar.advocacia?igsh=MXU1bWh6ZmRrcTdlNw==" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center gap-2 text-xs text-slate-400 hover:text-[#d4af37] transition-colors"
+                >
+                  <Instagram className="w-5 h-5 text-amber-500" />
+                  <span>Instagram</span>
+                </a>
+                <p className="text-[10px] text-slate-500 font-sans tracking-tight">
+                  © 2026 Dogimar Gomes dos Santos.<br />{lang === 'pt' ? 'Todos os direitos reservados.' : 'All rights reserved.'}
+                </p>
+              </div>
 
             </motion.div>
 
