@@ -8,6 +8,11 @@ declare module '*.jpg' {
   return value;
 }
 
+declare module '*.jpeg' {
+  const value: string;
+  return value;
+}
+
 declare module '*.svg' {
   const value: string;
   return value;

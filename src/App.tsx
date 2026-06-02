@@ -13,10 +13,101 @@ import {
   Lock,
   MessageSquare,
   ShieldCheck,
-  Award
+  Award,
+  MapPin,
+  Calendar
 } from 'lucide-react';
 import { Language, translations } from './types';
-import lawyerBg from './assets/images/lawyer_hand_on_chin_1779310808629.png';
+import advogadosFoto from './assets/images/advogados-foto.jpeg';
+
+interface Office {
+  city: string;
+  address: string;
+  cep?: string;
+  schedule: string;
+  phone?: string;
+  details?: string;
+  isHQ?: boolean;
+}
+
+const officesData: Record<'pt' | 'en', Office[]> = {
+  pt: [
+    {
+      city: 'Anápolis',
+      address: 'Travessa Julio Guerra, Nº 55, Centro, Anápolis',
+      cep: 'CEP: 75020-320',
+      schedule: 'Segunda a sexta-feira: 08:00 às 11:30 e das 13:00 às 17:30',
+      phone: '(62) 3321-4895',
+      isHQ: true
+    },
+    {
+      city: 'Goiânia',
+      address: 'Rua 20, Nº 95, Jardim Goiás, Goiânia',
+      cep: 'CEP: 74805-230',
+      schedule: 'Agendar atendimento',
+    },
+    {
+      city: 'Águas Lindas',
+      address: 'Qd 38, Lt 25, Jardim Brasília, Águas Lindas de Goiás',
+      details: '1ª rua após os correios',
+      schedule: 'Quarta-feira das 08:00 às 11:30',
+    },
+    {
+      city: 'Ceres',
+      address: 'Rua Alfredo de Padua, Nº 108-A, Qd. P, Lt 36, Centro, Ceres - GO',
+      schedule: 'Quinta-feira das 08:00 às 11:30',
+    },
+    {
+      city: 'Jaraguá',
+      address: 'Praça Sílvio de Castro Ribeiro, Qd 01, Lt. 01, Setor Central, Jaraguá - GO',
+      details: 'Esquina com o banco Bradesco',
+      schedule: 'Quinta-feira das 14:00 às 17:30',
+    },
+    {
+      city: 'Abadiânia',
+      address: 'Avenida Geraldo Rodrigues dos Santos, Qd 38, Lt 01, Nº 812, Centro, Abadiânia - GO',
+      schedule: 'Segunda e quarta-feira das 08:00 às 11:30',
+    }
+  ],
+  en: [
+    {
+      city: 'Anápolis',
+      address: '55 Julio Guerra St, Downtown, Anápolis',
+      cep: 'Zip: 75020-320',
+      schedule: 'Monday to Friday: 08:00 AM - 11:30 AM & 01:00 PM - 05:30 PM',
+      phone: '(62) 3321-4895',
+      isHQ: true
+    },
+    {
+      city: 'Goiânia',
+      address: '95 Street 20, Jardim Goiás, Goiânia',
+      cep: 'Zip: 74805-230',
+      schedule: 'Scheduled in-person support / appointments',
+    },
+    {
+      city: 'Águas Lindas',
+      address: 'Qd 38, Lt 25, Jardim Brasília, Águas Lindas de Goiás',
+      details: '1st street past the post office',
+      schedule: 'Wednesday: 08:00 AM to 11:30 AM',
+    },
+    {
+      city: 'Ceres',
+      address: '108-A Alfredo de Padua St, Qd. P, Lt 36, Downtown, Ceres - GO',
+      schedule: 'Thursday: 08:00 AM to 11:30 AM',
+    },
+    {
+      city: 'Jaraguá',
+      address: 'Sylvio de Castro Ribeiro Square, Qd 01, Lt 01, Central Area, Jaraguá - GO',
+      details: 'Corner with Bradesco Bank',
+      schedule: 'Thursday: 02:00 PM to 05:30 PM',
+    },
+    {
+      city: 'Abadiânia',
+      address: '812 Geraldo Rodrigues dos Santos Ave, Qd 38, Lt 01, Downtown, Abadiânia - GO',
+      schedule: 'Monday and Wednesday: 08:00 AM to 11:30 AM',
+    }
+  ]
+};
 
 export default function App() {
   const [lang, setLang] = useState<Language>('pt');
@@ -121,11 +212,11 @@ export default function App() {
               <Scale className="w-5 h-5 text-gold-dark group-hover:scale-110 transition-transform duration-300" />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif text-xl sm:text-2xl tracking-[0.2em] font-light text-white group-hover:text-gold-light transition-colors duration-300 leading-none">
-                ADVOCACIA <span className="text-gold-dark font-bold">&</span> ASSOCIADOS
+              <span className="font-serif text-lg sm:text-xl tracking-[0.1em] font-light text-white group-hover:text-gold-light transition-colors duration-300 leading-none uppercase">
+                DOGIMAR GOMES DOS SANTOS
               </span>
-              <span className="text-[9px] tracking-[0.4em] text-gold-light/80 mt-1.5 uppercase font-medium">
-                {lang === 'pt' ? 'Estratégia Jurídica de Alto Impacto' : 'High Impact Legal Strategy'}
+              <span className="text-[9px] tracking-[0.2em] text-gold-light/80 mt-1.5 uppercase font-medium">
+                {lang === 'pt' ? 'Advocacia e Consultoria Jurídica' : 'Law & Legal Consulting'}
               </span>
             </div>
           </motion.div>
@@ -295,34 +386,65 @@ export default function App() {
           </div>
         </div>
 
-        {/* Right Column: Visual Frame featuring Seated Thinker Image */}
-        <div className="lg:w-1/2 w-full min-h-[450px] lg:min-h-0 relative bg-[#151515] overflow-hidden flex items-center justify-center">
+        {/* Right Column: Visual Frame featuring Lawyer Team Photo */}
+        <div className="lg:w-1/2 w-full flex flex-col justify-between relative bg-[#0F0F0F] overflow-hidden">
           
-          {/* Subtle Background Silhouette Element */}
-          <div className="absolute inset-0 z-0">
-            <img 
-              src={lawyerBg} 
-              alt="Lawyer Seated" 
+          {/* Visual Image container with advanced linear and radial vignette masking */}
+          <div className="relative w-full h-[380px] sm:h-[450px] lg:h-full min-h-[380px] lg:min-h-[550px] overflow-hidden">
+            <motion.img 
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 0.9, scale: 1 }}
+              transition={{ duration: 1.6, ease: "easeOut" }}
+              src={advogadosFoto} 
+              alt="Advocacia Dogimar Gomes dos Santos" 
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover object-center scale-105 pointer-events-none filter brightness-95 opacity-80"
+              className="w-full h-full object-cover object-center pointer-events-none filter brightness-[0.9]"
             />
-            {/* Dynamic linear overlay fade-out to black from left side */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0F0F0F] via-transparent to-transparent z-10 hidden lg:block" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-transparent to-transparent z-10 lg:hidden" />
+            {/* Linear Masks: Side fade-outs to match dark theme (20% less intense on mobile to improve visibility) */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0F0F0F] via-transparent to-[#0F0F0F] z-10 pointer-events-none opacity-80 lg:opacity-100" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-transparent to-[#0F0F0F] z-10 pointer-events-none opacity-80 lg:opacity-100" />
+            
+            {/* Ellipictical radial mask: keeps center visible, smoothly shadows the edges (20% less intense on mobile to improve visibility) */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#0F0F0F_95%)] z-10 pointer-events-none opacity-80 lg:opacity-100" />
+            
+            {/* Thin Aesthetic Gold Frame overlay on the visual area */}
+            <div className="absolute top-5 left-5 right-5 bottom-5 border border-[#C5A059]/15 z-20 pointer-events-none hidden sm:block" />
           </div>
 
-          {/* Majestic Thin Aesthetic Gold Frame overlay */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[75%] border border-[#C5A059]/25 z-20 pointer-events-none hidden sm:block" />
+          {/* OAB Credentials list - Side on desktop (top-1/2 absolute translation), below on mobile (standard layout flow) */}
+          <div className="lg:absolute lg:right-6 lg:bottom-6 w-full lg:w-[290px] p-6 lg:bg-black/90 lg:backdrop-blur-md lg:border lg:border-[#C5A059]/20 lg:rounded-lg lg:shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-30 bg-[#111111]/90 border-t border-white/5 select-none text-left">
+            <h3 className="font-serif text-[10px] tracking-[0.25em] uppercase text-gold-light mb-4 font-bold border-b border-white/10 pb-2">
+              {lang === 'pt' ? 'Corpo Jurídico' : 'Legal Members'}
+            </h3>
+            
+            <div className="space-y-4">
+              <div className="flex flex-col group">
+                <span className="text-white font-serif text-[13px] font-semibold tracking-wide group-hover:text-gold-light transition-colors duration-200">
+                  Pedro Lucas Nogueira dos Santos
+                </span>
+                <span className="text-[10px] text-white/50 font-mono mt-0.5">
+                  OAB/GO 76.522
+                </span>
+              </div>
 
-          {/* Platinum Context Medal Badge (Bottom right) */}
-          <div className="absolute bottom-10 right-10 text-right z-30">
-            <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-[#C5A059] font-semibold">
-              {lang === 'pt' ? 'Dr. Fulano de Tal' : 'Dr. Fulano de Tal'}
-            </span>
-            <br />
-            <span className="font-sans text-[9px] uppercase tracking-[0.2em] text-white/30 font-medium mt-1 inline-block">
-              {lang === 'pt' ? 'Sócio Fundador' : 'Senior Partner'}
-            </span>
+              <div className="flex flex-col group border-t border-white/5 pt-3">
+                <span className="text-white font-serif text-[13px] font-semibold tracking-wide group-hover:text-gold-light transition-colors duration-200">
+                  Dogimar Gomes dos Santos
+                </span>
+                <span className="text-[10px] text-white/50 font-mono mt-0.5">
+                  OAB/GO 17.792
+                </span>
+              </div>
+
+              <div className="flex flex-col group border-t border-white/5 pt-3">
+                <span className="text-white font-serif text-[13px] font-semibold tracking-wide group-hover:text-gold-light transition-colors duration-200">
+                  Isadora Nogueira dos Santos
+                </span>
+                <span className="text-[10px] text-white/50 font-mono mt-0.5">
+                  OAB/GO 64.126
+                </span>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -330,53 +452,95 @@ export default function App() {
       </section>
 
       {/* 4. KEY METADATA SUMMARY GRID BAR */}
-      <section className="grid grid-cols-1 md:grid-cols-3 border-b border-white/5 bg-white/[0.01]">
+      <section className="grid grid-cols-1 md:grid-cols-3 border-b border-white/5 bg-white/[0.01] overflow-hidden">
         
-        <div className="px-8 sm:px-12 py-8 border-r border-[#151515] md:border-white/5 flex flex-col justify-center">
-          <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#C5A059] mb-1.5 font-semibold">
-            {lang === 'pt' ? 'Localização' : 'Location'}
+        <button 
+          onClick={() => {
+            const el = document.getElementById('unidades');
+            el?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="relative px-8 sm:px-12 py-8 border-r border-[#151515] md:border-white/5 flex flex-col justify-center text-left hover:bg-white/[0.04] active:bg-white/[0.08] transition-all duration-300 focus:outline-none cursor-pointer group overflow-hidden"
+        >
+          {/* Elegant gold accent bar indicating clickability */}
+          <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-[#C5A059] opacity-65 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          <div className="flex items-center justify-between w-full mb-1.5">
+            <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#C5A059] font-semibold flex items-center gap-1.5 group-hover:text-gold-light transition-colors">
+              {lang === 'pt' ? 'Unidades em Goiás' : 'Offices in Goiás'} 
+              <span className="text-[10px] bg-gold-dark/20 text-gold-light px-2 py-0.5 rounded-full font-sans font-bold leading-none">6</span>
+            </p>
+            {/* Call to action arrow that slides on hover */}
+            <span className="text-[10px] uppercase tracking-[0.15em] text-[#C5A059]/75 group-hover:text-gold-light group-hover:translate-x-1 transition-all duration-300 font-sans font-semibold">
+              {lang === 'pt' ? 'Ver todas →' : 'See all →'}
+            </span>
+          </div>
+          <p className="text-sm font-light text-white/80 font-sans tracking-wide leading-relaxed group-hover:text-white transition-colors pr-6">
+            {lang === 'pt' 
+              ? 'Anápolis, Goiânia, Águas Lindas, Ceres, Jaraguá e Abadiânia' 
+              : 'Anápolis, Goiânia, Águas Lindas, Ceres, Jaraguá & Abadiânia'}
           </p>
-          <p className="text-sm font-light text-white/80 font-sans tracking-wide">
-            {lang === 'pt' ? 'Av. Paulista, 2000 — São Paulo, SP' : 'Paulista Ave, 2000 — São Paulo, Brazil'}
-          </p>
-        </div>
+        </button>
 
-        <div className="px-8 sm:px-12 py-8 border-r border-[#151515] md:border-white/5 flex flex-col justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+          className="px-8 sm:px-12 py-8 border-r border-[#151515] md:border-white/5 flex flex-col justify-center"
+        >
           <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#C5A059] mb-1.5 font-semibold">
             {lang === 'pt' ? 'Atendimento Direto' : 'Direct Support'}
           </p>
           <p className="text-sm font-light text-white/80 font-sans tracking-wide">
-            {t.topBar.phone}
+            (62) 9 8222-3911
           </p>
-        </div>
+        </motion.div>
 
-        <div className="px-8 sm:px-12 py-8 flex flex-col justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+          className="px-8 sm:px-12 py-8 flex flex-col justify-center"
+        >
           <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#C5A059] mb-1.5 font-semibold">
             {lang === 'pt' ? 'Áreas Principais' : 'Core Disciplines'}
           </p>
           <p className="text-sm font-light italic text-white/70 font-serif">
             {lang === 'pt' ? 'Corporativo, Tributário & Civil de Elite' : 'Corporate, Tax & Elite Civil Litigation'}
           </p>
-        </div>
+        </motion.div>
 
       </section>
 
       {/* 5. PRACTICAL HIGHLIGHT DETAILS AREA */}
-      <section id="details" className="relative bg-[#111] py-24 px-4 sm:px-6 lg:px-8">
+      <section id="details" className="relative bg-[#111] py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-center mb-16"
+          >
             <p className="text-xs uppercase tracking-[0.3em] text-[#C5A059] mb-3 font-semibold font-sans">
               {lang === 'pt' ? 'Nossos Valores' : 'Our Principles'}
             </p>
             <h2 className="font-serif text-3xl sm:text-4xl font-light text-white">
               {lang === 'pt' ? 'Alto Padrão em Advocacia' : 'The Standard of True Craftsmanship'}
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <div className="p-8 bg-[#151515] border border-white/5 rounded-lg hover:border-[#C5A059]/20 transition-all duration-300">
+            <motion.div 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0 }}
+              className="p-8 bg-[#151515] border border-white/5 rounded-lg hover:border-[#C5A059]/20 transition-all duration-300"
+            >
               <div className="w-12 h-12 bg-white/[0.02] border border-white/10 rounded flex items-center justify-center text-[#C5A059] mb-6">
                 <ShieldCheck className="w-5 h-5" />
               </div>
@@ -388,9 +552,15 @@ export default function App() {
                   ? 'Garantimos absoluto sigilo profissional e compliance rígido com todas as leis de segurança de dados.' 
                   : 'We guarantee absolute professional secrecy and strict compliance with all data protection regulations.'}
               </p>
-            </div>
+            </motion.div>
 
-            <div className="p-8 bg-[#151515] border border-white/5 rounded-lg hover:border-[#C5A059]/20 transition-all duration-300">
+            <motion.div 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="p-8 bg-[#151515] border border-white/5 rounded-lg hover:border-[#C5A059]/20 transition-all duration-300"
+            >
               <div className="w-12 h-12 bg-white/[0.02] border border-white/10 rounded flex items-center justify-center text-[#C5A059] mb-6">
                 <Award className="w-5 h-5" />
               </div>
@@ -402,9 +572,15 @@ export default function App() {
                   ? 'Consolidado como um dos escritórios de maior prestígio, com atuação destacada em tribunais de todo o país.' 
                   : 'Established as one of the most prestigious law firms, with outstanding achievements across federal courts.'}
               </p>
-            </div>
+            </motion.div>
 
-            <div className="p-8 bg-[#151515] border border-white/5 rounded-lg hover:border-[#C5A059]/20 transition-all duration-300">
+            <motion.div 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              className="p-8 bg-[#151515] border border-white/5 rounded-lg hover:border-[#C5A059]/20 transition-all duration-300"
+            >
               <div className="w-12 h-12 bg-white/[0.02] border border-white/10 rounded flex items-center justify-center text-[#C5A059] mb-6">
                 <MessageSquare className="w-5 h-5" />
               </div>
@@ -416,9 +592,111 @@ export default function App() {
                   ? 'Cada cliente recebe atendimento dedicado com soluções sob medida focadas na resolução ágil do seu problema.' 
                   : 'Every client receives dedicated support with customized solutions focused on rapid conflict resolution.'}
               </p>
-            </div>
+            </motion.div>
 
           </div>
+        </div>
+      </section>
+
+      {/* 5.5 REGIONAL OFFICES / LOCATIONS SECTION */}
+      <section id="unidades" className="relative bg-[#0A0A0A] py-24 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(197,160,89,0.03),transparent_45%)] pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-center mb-16"
+          >
+            <p className="text-xs uppercase tracking-[0.3em] text-[#C5A059] mb-3 font-semibold font-sans">
+              {lang === 'pt' ? 'Presença Regional' : 'Regional Presence'}
+            </p>
+            <h2 className="font-serif text-3xl sm:text-4xl font-light text-white mb-4">
+              {lang === 'pt' ? 'Nossos Escritórios' : 'Our Office Branches'}
+            </h2>
+            <div className="w-12 h-[2px] bg-[#C5A059] mx-auto mb-4" />
+            <p className="text-sm text-white/50 max-w-2xl mx-auto font-light font-sans leading-relaxed">
+              {lang === 'pt' 
+                ? 'Estrutura sólida com assessoria presencial e agendada em múltiplos municípios estratégicos do estado de Goiás.'
+                : 'Solid regional presence offering scheduled and on-site premium legal consultations in major cities of Goiás.'}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {officesData[lang].map((office, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: idx * 0.08 }}
+                className="group relative bg-[#121212] border border-white/5 rounded-lg p-8 hover:border-[#C5A059]/30 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.6)] flex flex-col justify-between"
+              >
+                {/* Visual border golden outline on hover */}
+                <div className="absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-r from-[#C5A059]/0 via-[#C5A059] to-[#C5A059]/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center rounded-b-lg" />
+                
+                <div>
+                  {/* City Name Header & Icon */}
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2.5 bg-white/[0.02] border border-white/5 rounded text-[#C5A059] group-hover:border-[#C5A059]/30 transition-colors">
+                        <MapPin className="w-4 h-4" />
+                      </div>
+                      <h3 className="font-serif text-xl font-medium text-white group-hover:text-gold-light transition-colors">
+                        {office.city}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Fully Readable Address Detail */}
+                  <div className="space-y-3 mb-8">
+                    <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans font-light tracking-wide">
+                      {office.address}
+                    </p>
+                    
+                    {office.cep && (
+                      <p className="text-[10.5px] font-mono text-[#C5A059]">
+                        {office.cep}
+                      </p>
+                    )}
+
+                    {office.details && (
+                      <div className="inline-block bg-white/[0.02] border border-white/5 rounded px-2.5 py-1 text-[11px] text-white/40 font-sans">
+                        <span className="italic">{office.details}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Structured Schedule Section Card Footer */}
+                <div className="border-t border-white/5 pt-5 mt-auto flex flex-col gap-3">
+                  <div className="flex items-start gap-2.5 text-white/50 text-xs">
+                    <Calendar className="w-3.5 h-3.5 text-[#C5A059] mt-0.5 flex-shrink-0" />
+                    <div className="flex flex-col">
+                      <span className="text-[10px] uppercase tracking-wider text-[#C5A059]/85 font-semibold font-sans">
+                        {lang === 'pt' ? 'Atendimento Presencial' : 'Consultation Hours'}
+                      </span>
+                      <span className="text-white/60 font-light mt-1 font-sans leading-relaxed">
+                        {office.schedule}
+                      </span>
+                    </div>
+                  </div>
+
+                  {office.phone && (
+                    <div className="flex items-center gap-2.5 text-xs text-white/50 mt-1 border-t border-white/[0.03] pt-3">
+                      <Phone className="w-3.5 h-3.5 text-[#C5A059] flex-shrink-0" />
+                      <span className="font-mono text-white/70">{office.phone}</span>
+                    </div>
+                  )}
+                </div>
+
+              </motion.div>
+            ))}
+          </div>
+
         </div>
       </section>
 
@@ -533,7 +811,7 @@ export default function App() {
                             required
                             value={formData.phone}
                             onChange={handleInputChange}
-                            placeholder="(11) 99999-9999"
+                            placeholder="(62) 98222-3911"
                             className="w-full bg-stone-950 border border-stone-800 focus:border-gold-light text-stone-100 placeholder-stone-600 px-4 py-2.5 rounded text-sm outline-none transition-colors"
                           />
                         </div>

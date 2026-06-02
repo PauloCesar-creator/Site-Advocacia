@@ -43,12 +43,12 @@ export interface TranslationSet {
 export const translations: Record<Language, TranslationSet> = {
   pt: {
     topBar: {
-      phone: "+55 (11) 98765-4321",
-      email: "contato@attorneyster.com.br",
-      schedule: "Atendimento Seg - Sex: 08:00 - 18:00",
+      phone: "(62) 3321-4895",
+      email: "dogimaradv@hotmail.com",
+      schedule: "Atendimento Seg - Sex: 08:00 - 11:30 | 13:00 - 17:30",
     },
     nav: {
-      brand: "ATTORNEYSTER",
+      brand: "DOGIMAR GOMES DOS SANTOS",
       home: "Início",
       about: "Sobre Nós",
       services: "Áreas de Atuação",
@@ -63,7 +63,7 @@ export const translations: Record<Language, TranslationSet> = {
       ctaSecondary: "CONHEÇA NOSSO TRABALHO",
     },
     stats: {
-      years: { value: "15+", label: "Anos de Experiência" },
+      years: { value: "27+", label: "Anos de Experiência" },
       cases: { value: "1.2k+", label: "Casos de Sucesso" },
       rating: { value: "99%", label: "Taxa de Aprovação" },
     },
@@ -82,12 +82,12 @@ export const translations: Record<Language, TranslationSet> = {
   },
   en: {
     topBar: {
-      phone: "+1 (911) 98765-4321",
-      email: "contact@attorneyster.com",
-      schedule: "Hours Mon - Fri: 08:00 AM - 06:00 PM",
+      phone: "(62) 3321-4895",
+      email: "dogimaradv@hotmail.com",
+      schedule: "Hours Mon - Fri: 08:00 AM - 11:30 AM | 01:00 PM - 05:30 PM",
     },
     nav: {
-      brand: "ATTORNEYSTER",
+      brand: "DOGIMAR GOMES DOS SANTOS",
       home: "Home",
       about: "About Us",
       services: "Practice Areas",
@@ -102,7 +102,7 @@ export const translations: Record<Language, TranslationSet> = {
       ctaSecondary: "LEARN MORE",
     },
     stats: {
-      years: { value: "15+", label: "Years Experience" },
+      years: { value: "27+", label: "Years Experience" },
       cases: { value: "1.2k+", label: "Successful Cases" },
       rating: { value: "99%", label: "Satisfaction Rate" },
     },
