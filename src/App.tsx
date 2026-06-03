@@ -21,7 +21,8 @@ import {
 import { Language, translations } from './types';
 import advogadosFoto from './assets/images/advogados-foto.jpeg';
 import advogadoMobile from './assets/images/advogado-mobile.png';
-import logoImg from './assets/images/logo.png';
+import logoSuperior from './assets/images/logo-superior.png';
+import logoCentro from './assets/images/logo-centro.png';
 
 interface Office {
   city: string;
@@ -216,52 +217,16 @@ export default function App() {
           {/* MAIN NAVBAR LOGO AREA */}
           <header className="w-full py-5 px-6 max-w-7xl mx-auto flex justify-between items-center bg-transparent border-b border-white/5">
             
-            {/* Elegant Intersecting Monogram logo "DG" identical to corporate brand with neon bottom border */}
+            {/* Elegant Logo Image "logo-superior" replacing the previous monogram div, maintaining exact size and aspect ratio with gold glowing neon drop-shadow and background lift */}
             <a href="#home" className="flex items-center group cursor-pointer select-none" id="navbar-logo-link">
-              <div className="relative w-24 sm:w-28 h-14 sm:h-16 flex flex-col items-center justify-center pb-2 select-none">
-                {/* SVG holding the premium identical DG letter shapes */}
-                <div className="w-full h-full flex items-center justify-center overflow-hidden">
-                  <svg viewBox="0 0 160 102" className="w-[85%] h-[85%] transition-transform duration-300 group-hover:scale-105" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="goldGradNavbar" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#FFFFFF" />
-                        <stop offset="30%" stopColor="#fefbf2" />
-                        <stop offset="70%" stopColor="#e8c96c" />
-                        <stop offset="100%" stopColor="#caaf59" />
-                      </linearGradient>
-                      <filter id="dropGlowNavbar" x="-10%" y="-10%" width="130%" height="130%">
-                        <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.75"/>
-                      </filter>
-                    </defs>
-                    <g filter="url(#dropGlowNavbar)" className="pointer-events-none">
-                      {/* Letter D */}
-                      <text 
-                        x="24" 
-                        y="80" 
-                        fontFamily="'Playfair Display', 'Didot', 'Georgia', serif" 
-                        fontSize="84" 
-                        fontWeight="600" 
-                        fill="url(#goldGradNavbar)"
-                      >
-                        D
-                      </text>
-                      {/* Letter G (Italic and starting right where D ends) */}
-                      <text 
-                        x="76" 
-                        y="85" 
-                        fontFamily="'Playfair Display', 'Didot', 'Georgia', serif" 
-                        fontSize="84" 
-                        fontWeight="500" 
-                        fontStyle="italic"
-                        fill="url(#goldGradNavbar)"
-                      >
-                        G
-                      </text>
-                    </g>
-                  </svg>
-                </div>
-                {/* Thin neon bottom flare matching image 2 and request */}
-                <div className="absolute bottom-1 w-16 h-[1px] bg-[#d4af37] shadow-[0_1px_8px_rgba(212,175,55,0.9)] transition-all duration-300 group-hover:w-20" />
+              <div className="relative flex items-center justify-center">
+                {/* Subtle minimalist golden background aura */}
+                <div className="absolute w-16 h-8 bg-[#d4af37]/8 rounded-full filter blur-xl -z-10 pointer-events-none opacity-80" />
+                <img 
+                  src={logoSuperior} 
+                  alt="Logo Superior" 
+                  className="w-24 sm:w-28 h-14 sm:h-16 object-contain select-none transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.6)] drop-shadow-[0_0_4px_rgba(255,255,255,0.25)] group-hover:drop-shadow-[0_4px_28px_rgba(212,175,55,0.85)] brightness-110 saturate-[1.05]"
+                />
               </div>
             </a>
 
@@ -285,58 +250,18 @@ export default function App() {
         {/* HERO CENTRAL BRAND BOX AREA - HOUSES MAIN SLOGANS (LOGO REPLACED AND TEXT RE-POSITIONED BELOW FACE LINE) */}
         <div className="max-w-4xl mx-auto px-6 pt-[60vh] sm:pt-[63vh] md:pt-[65vh] lg:pt-[68vh] xl:pt-[70vh] pb-24 flex flex-col items-center justify-center text-center relative z-10 select-none w-full">
           
-          {/* Re-add the gorgeous gold-framed DG Logo Box exactly like the example image (now customized to only have a bottom border with soft gold neon glow) */}
+          {/* Central Logo Box represented by "logo-centro" image with a minimalist elegant gold border */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="relative w-56 sm:w-64 h-36 sm:h-42 border-b-2 border-[#d4af37]/80 rounded-[1px] flex items-center justify-center bg-black/45 backdrop-blur-xs mb-8 select-none shadow-[0_10px_25px_-5px_rgba(212,175,55,0.25)]"
+            className="relative w-56 sm:w-64 h-36 sm:h-42 p-4 border border-[#d4af37]/25 rounded-[1px] bg-black/20 backdrop-blur-xs shadow-[0_4px_20px_rgba(0,0,0,0.4),inset_0_0_12px_rgba(212,175,55,0.04)] mb-8 flex items-center justify-center select-none group transition-all duration-500 hover:border-[#d4af37]/45"
           >
-            {/* Elegant lens flare / star glowing highlight in center of the bottom border */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 flex items-center justify-center">
-              <div className="w-12 h-[2px] bg-gradient-to-r from-transparent via-[#d4af37] to-transparent" />
-              <div className="absolute w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_12px_6px_rgba(255,255,255,0.85),0_0_4px_2px_rgba(212,175,55,0.9)]" />
-            </div>
-
-            {/* SVG containing the premium interlocking DG letters */}
-            <svg viewBox="0 0 160 102" className="w-[82%] h-[82%] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="goldGradCentralHero" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#FFFFFF" />
-                  <stop offset="35%" stopColor="#fefbf2" />
-                  <stop offset="75%" stopColor="#e8c96c" />
-                  <stop offset="100%" stopColor="#caaf59" />
-                </linearGradient>
-                <filter id="dropGlowCentralHero" x="-10%" y="-10%" width="130%" height="130%">
-                  <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.75"/>
-                </filter>
-              </defs>
-              <g filter="url(#dropGlowCentralHero)">
-                {/* Letter D */}
-                <text 
-                  x="20" 
-                  y="81" 
-                  fontFamily="'Cormorant Garamond', 'Playfair Display', serif" 
-                  fontSize="92" 
-                  fontWeight="600" 
-                  fill="url(#goldGradCentralHero)"
-                >
-                  D
-                </text>
-                {/* Letter G (Italicized and starting right where D ends) */}
-                <text 
-                  x="74" 
-                  y="86" 
-                  fontFamily="'Cormorant Garamond', 'Playfair Display', serif" 
-                  fontSize="92" 
-                  fontWeight="500" 
-                  fontStyle="italic"
-                  fill="url(#goldGradCentralHero)"
-                >
-                  G
-                </text>
-              </g>
-            </svg>
+            <img 
+              src={logoCentro} 
+              alt="Logo Centro" 
+              className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.3)] transition-all duration-500 group-hover:scale-[1.02]"
+            />
           </motion.div>
 
           {/* Grouped hero content container for tighter, adjustable spacing as requested by the user */}
@@ -486,13 +411,13 @@ export default function App() {
                 {lang === 'pt' ? (
                   <>
                     <p>
-                      Há mais de 27 anos, o escritório <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> atua com compromisso, dedicação e excelência na defense dos direitos da população de Anápolis e região.
+                      Há mais de 27 anos, o escritório <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> atua com compromisso, dedicação e excelência na defesa dos direitos da população de todo o estado de Goiás e Online por todo país.
                     </p>
                     <p>
                       Nossa história foi construída através da confiança de clientes que encontraram em nosso trabalho um atendimento sério, humanizado e especializado, sempre buscando soluções eficientes para cada situação.
                     </p>
                     <p>
-                      Somos referência na atuação em <strong className="font-bold text-[#15408C]">Direito Previdenciário</strong>, auxiliando diariamente pessoas que tiveram benefícios negados ou indeferidos pelo INSS, além de atuar em demandas envolvendo aposentadorias, pensão por morte, salário-maternidade, auxílio-doença, auxílio-acidente, BPC/LOAS e demais benefícios previdenciários.
+                      Somos referência na atuação em <strong className="font-bold text-[#15408C]">Direito Previdenciário</strong>, auxiliando diariamente pessoas que tiveram benefícios negados pelo INSS, além de atuar em demandas envolvendo aposentadorias, pensão por morte, salário-maternidade, auxílio-doença, auxílio-acidente, BPC/LOAS e demais benefícios previdenciários.
                     </p>
                     <p>
                       Também prestamos atendimento especializado nas áreas <strong className="font-bold text-[#15408C]">trabalhista, cível e agrária</strong>, sempre prezando pela qualidade dos serviços prestados, responsabilidade profissional e dedicação em cada causa assumida.
