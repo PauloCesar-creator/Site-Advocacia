@@ -1,6 +1,8 @@
 {
-  "name": "Dogimar Gomes Advocacia",
-  "description": "Website premium e elegante para o escritório de advocacia Dogimar Gomes dos Santos, especializado em Direito Previdenciário com presença regional no estado de Goiás.",
+  "name": "Remix: Projeto Advocacia - DG",
+  "description": "Um site de advocacia premium e elegante para o escritório Dogimar, com design de alta classe, tipografia refinada e seções sob medida.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

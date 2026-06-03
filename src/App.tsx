@@ -12,6 +12,7 @@ import {
   CheckCircle, 
   Lock,
   MessageSquare,
+  MessageCircle,
   ShieldCheck,
   Award,
   MapPin,
@@ -186,30 +187,56 @@ export default function App() {
         <div className="w-full z-30 flex flex-col relative select-none">
           
           {/* THE TOP NARROW UTILITY CONTACT LINE */}
-          <div className="w-full bg-black/45 backdrop-blur-xs border-b border-white/5 py-3 text-[10px] tracking-[0.18em]">
-            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-slate-350 font-medium font-sans">
+          <div className="w-full bg-black/45 backdrop-blur-xs border-b border-white/5 py-2.5 text-[9.5px] xs:text-[10px] tracking-normal xs:tracking-[0.12em] sm:tracking-[0.18em]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center text-slate-350 font-medium font-sans">
               
-              {/* Call Link - Left */}
-              <a href="tel:6233214895" className="flex items-center gap-2 hover:text-[#d4af37] transition-all cursor-pointer">
-                <Phone className="w-3.5 h-3.5 text-amber-500/90" />
-                <span className="font-mono text-[10.5px] font-medium">(62) 3321-4895</span>
-              </a>
+              {/* Call Links - Left */}
+              <div className="flex flex-col gap-1 py-0.5 justify-center">
+                <a href="tel:6233214895" className="flex items-center gap-1.5 hover:text-[#d4af37] transition-all cursor-pointer">
+                  <Phone className="w-3.5 h-3.5 text-amber-500/90" />
+                  <span className="font-mono text-[10px] xs:text-[10.5px] font-medium tracking-normal">(62) 3321-4895</span>
+                </a>
+                <a 
+                  href="https://wa.me/5562982223911" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center gap-1.5 hover:text-[#25D366] transition-all cursor-pointer"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+                  <span className="font-mono text-[10px] xs:text-[10.5px] font-medium tracking-normal">(62) 98222-3911</span>
+                </a>
+              </div>
 
-              {/* Email Link - Center */}
-              <a href="mailto:dogimaradv@hotmail.com" className="hidden sm:flex items-center gap-2 hover:text-[#d4af37] transition-all cursor-pointer">
-                <Mail className="w-3.5 h-3.5 text-amber-500/90" />
-                <span className="lowercase font-sans text-slate-400 font-light hover:text-white transition-colors">dogimaradv@hotmail.com</span>
-              </a>
+              {/* Center / Right - Contacts, Social & Lang */}
+              <div className="flex items-center gap-2 xs:gap-3 sm:gap-6">
+                {/* Email Link */}
+                <a href="mailto:dogimaradv@hotmail.com" className="hidden md:flex items-center gap-2 hover:text-[#d4af37] transition-all cursor-pointer">
+                  <Mail className="w-3.5 h-3.5 text-amber-500/90" />
+                  <span className="lowercase font-sans text-slate-400 font-light hover:text-white transition-colors">dogimaradv@hotmail.com</span>
+                </a>
 
-              {/* Action Language Button - Right */}
-              <button 
-                onClick={toggleLanguage}
-                className="flex items-center gap-1.5 hover:text-[#d4af37] transition-all cursor-pointer bg-white/5 py-1 px-2.5 rounded border border-white/10"
-                title="Swith Language / Alterar Idioma"
-              >
-                <Globe className="w-3 h-3 text-amber-500/95" />
-                <span>{lang === 'pt' ? 'EN' : 'PT'}</span>
-              </button>
+                {/* Instagram button: visible on both desktop & mobile config */}
+                <a 
+                  href="https://www.instagram.com/dogimar.advocacia?igsh=MXU1bWh6ZmRrcTdlNw==" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center gap-1 hover:text-[#d4af37] transition-all cursor-pointer text-slate-350"
+                  title="Instagram"
+                >
+                  <Instagram className="w-3.5 h-3.5 text-amber-500/90" />
+                  <span className="font-sans text-[9px] xs:text-[10px] sm:text-[10.5px] text-slate-400 font-medium hover:text-white transition-colors tracking-tight xs:tracking-normal sm:tracking-wider lowercase">dogimar.advocacia</span>
+                </a>
+
+                {/* Action Language Button - Right (condensed on mobile) */}
+                <button 
+                  onClick={toggleLanguage}
+                  className="flex items-center gap-1 hover:text-[#d4af37] transition-all cursor-pointer bg-white/5 py-0.5 px-1.5 xs:py-1 xs:px-2 rounded border border-white/10 text-[9px] xs:text-[10px]"
+                  title="Switch Language / Alterar Idioma"
+                >
+                  <Globe className="w-2.5 h-2.5 xs:w-3 xs:h-3 text-amber-500/95" />
+                  <span>{lang === 'pt' ? 'EN' : 'PT'}</span>
+                </button>
+              </div>
 
             </div>
           </div>
@@ -217,25 +244,66 @@ export default function App() {
           {/* MAIN NAVBAR LOGO AREA */}
           <header className="w-full py-5 px-6 max-w-7xl mx-auto flex justify-between items-center bg-transparent border-b border-white/5">
             
-            {/* Elegant Logo Image "logo-superior" replacing the previous monogram div, maintaining exact size and aspect ratio with gold glowing neon drop-shadow and background lift */}
-            <a href="#home" className="flex items-center group cursor-pointer select-none" id="navbar-logo-link">
-              <div className="relative flex items-center justify-center">
-                {/* Subtle minimalist golden background aura */}
-                <div className="absolute w-16 h-8 bg-[#d4af37]/8 rounded-full filter blur-xl -z-10 pointer-events-none opacity-80" />
-                <img 
-                  src={logoSuperior} 
-                  alt="Logo Superior" 
-                  className="w-24 sm:w-28 h-14 sm:h-16 object-contain select-none transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.6)] drop-shadow-[0_0_4px_rgba(255,255,255,0.25)] group-hover:drop-shadow-[0_4px_28px_rgba(212,175,55,0.85)] brightness-110 saturate-[1.05]"
-                />
-              </div>
-            </a>
+            <div className="flex items-center gap-8 md:gap-12">
+              {/* Elegant Logo Image "logo-superior" replacing the previous monogram div, maintaining exact size and aspect ratio with gold glowing neon drop-shadow and background lift */}
+              <a href="#home" className="flex items-center group cursor-pointer select-none" id="navbar-logo-link">
+                <div className="relative flex items-center justify-center">
+                  {/* Subtle minimalist golden background aura */}
+                  <div className="absolute w-16 h-8 bg-[#d4af37]/8 rounded-full filter blur-xl -z-10 pointer-events-none opacity-80" />
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    className="flex items-center justify-center"
+                  >
+                    <img 
+                      src={logoSuperior} 
+                      alt="Logo Superior" 
+                      className="w-24 sm:w-28 h-14 sm:h-16 object-contain select-none transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.6)] drop-shadow-[0_0_4px_rgba(255,255,255,0.25)] group-hover:drop-shadow-[0_4px_28px_rgba(212,175,55,0.85)] brightness-110 saturate-[1.05]"
+                    />
+                  </motion.div>
+                </div>
+              </a>
 
+              {/* Desktop Horizontal Navigation Links (Main menu next to logo) */}
+              <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+                <button 
+                  onClick={() => document.getElementById('historia')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="font-serif text-sm tracking-wide text-slate-350 hover:text-amber-400 hover:scale-105 transition-all duration-300 cursor-pointer text-left font-medium"
+                >
+                  {lang === 'pt' ? 'Nossa História' : 'Our Story'}
+                </button>
 
+                <button 
+                  onClick={() => document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="font-serif text-sm tracking-wide text-slate-350 hover:text-amber-400 hover:scale-105 transition-all duration-300 cursor-pointer text-left font-medium"
+                >
+                  {lang === 'pt' ? 'Atuação & Valores' : 'Practice & Values'}
+                </button>
 
-            {/* Hamburger white toggle menu trigger */}
+                <button 
+                  onClick={() => document.getElementById('unidades')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="font-serif text-sm tracking-wide text-slate-350 hover:text-amber-400 hover:scale-105 transition-all duration-300 cursor-pointer text-left font-medium"
+                >
+                  {lang === 'pt' ? 'Nossos Escritórios' : 'Our Branches'}
+                </button>
+
+                <button 
+                  onClick={() => setIsModalOpen(true)}
+                  className="font-serif text-sm tracking-wide text-amber-500 hover:text-amber-400 hover:scale-105 transition-all duration-300 font-bold cursor-pointer text-left"
+                >
+                  {lang === 'pt' ? 'Agendar Consulta' : 'Book Appointment'}
+                </button>
+              </nav>
+            </div>
+
+            {/* Hamburger white toggle menu trigger - ONLY visible under desktop size (hidden on md and up) */}
             <button 
               onClick={() => setIsMenuOpen(true)}
-              className="p-1.5 rounded hover:bg-white/10 text-white hover:text-amber-400 transition-colors cursor-pointer"
+              className="block md:hidden p-1.5 rounded hover:bg-white/10 text-white hover:text-amber-400 transition-colors cursor-pointer"
               aria-label="Menu"
             >
               <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,9 +320,10 @@ export default function App() {
           
           {/* Central Logo Box represented by "logo-centro" image with a minimalist elegant gold border */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.15 }}
+            initial={{ opacity: 0, scale: 0.88, y: -10 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ type: "spring", stiffness: 50, damping: 18, delay: 0.1 }}
             className="relative w-56 sm:w-64 h-36 sm:h-42 p-4 border border-[#d4af37]/25 rounded-[1px] bg-black/20 backdrop-blur-xs shadow-[0_4px_20px_rgba(0,0,0,0.4),inset_0_0_12px_rgba(212,175,55,0.04)] mb-8 flex items-center justify-center select-none group transition-all duration-500 hover:border-[#d4af37]/45"
           >
             <img 
@@ -268,9 +337,10 @@ export default function App() {
           <div className="flex flex-col items-center justify-center text-center w-full max-w-3xl mx-auto mt-2">
             {/* Main Display Headline name */}
             <motion.h1 
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.15 }}
+              initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
               className="font-serif text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.2em] sm:tracking-[0.25em] text-[#faf6e8] leading-tight mb-2 select-text uppercase font-semibold"
             >
               DOGIMAR GOMES DOS SANTOS
@@ -278,9 +348,10 @@ export default function App() {
 
             {/* Subtle sub head */}
             <motion.p 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.35 }}
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.95, ease: "easeOut", delay: 0.4 }}
               className="font-sans text-[10px] sm:text-xs text-amber-500 uppercase tracking-[0.3em] font-bold mb-4 select-text"
             >
               {lang === 'pt' ? 'ADVOCACIA E CONSULTORIA JURÍDICA' : 'LAW & LEGAL CONSULTING'}
@@ -289,7 +360,8 @@ export default function App() {
             {/* Diamond Line element separator */}
             <motion.div 
               initial={{ opacity: 0, scaleX: 0 }}
-              animate={{ opacity: 1, scaleX: 1 }}
+              whileInView={{ opacity: 1, scaleX: 1 }}
+              viewport={{ once: false, amount: 0.1 }}
               transition={{ duration: 1, delay: 0.45 }}
               className="w-full max-w-sm h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/65 to-transparent flex items-center justify-center mb-4 relative"
             >
@@ -300,9 +372,10 @@ export default function App() {
 
             {/* Excelencia | Tradicao | Confianca alignment */}
             <motion.p 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.55 }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
               className="font-sans text-[10.5px] sm:text-xs text-[#d1c3a7] tracking-[0.35em] sm:tracking-[0.45em] font-semibold uppercase mb-5 text-center"
             >
               {lang === 'pt' ? (
@@ -314,9 +387,10 @@ export default function App() {
 
             {/* Beautiful text: Há mais de 27 anos defendendo direitos com excelência... */}
             <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.2, delay: 0.65 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
               className="font-serif text-[#ebe3cd] text-base sm:text-lg lg:text-xl font-light italic leading-relaxed max-w-2xl mb-7 select-text"
             >
               {lang === 'pt' ? (
@@ -331,20 +405,19 @@ export default function App() {
             </motion.p>
 
             {/* Premium clear button CTA with balance scale symbol */}
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-col items-center"
-            >
-              <button 
+            <div className="flex flex-col items-center">
+              <motion.button 
+                initial={{ opacity: 0, scale: 0.85, y: 15 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.1 }}
+                transition={{ type: "spring", stiffness: 70, damping: 15, delay: 0.75 }}
                 onClick={() => setIsModalOpen(true)}
                 className="px-8 sm:px-10 py-4.5 bg-transparent border border-[#d4af37]/80 hover:bg-[#d4af37]/10 text-[#d4af37] font-sans font-medium text-xs sm:text-sm uppercase tracking-[0.22em] transition-all duration-300 rounded shadow-[0_4px_25px_rgba(212,175,55,0.03)] flex items-center gap-3 active:scale-95 cursor-pointer font-bold hover:shadow-[0_4px_35px_rgba(212,175,55,0.12)] hover:border-[#d4af37]"
               >
                 <Scale className="w-5 h-5 text-[#d4af37]" />
                 <span>{lang === 'pt' ? 'FALAR COM UM ESPECIALISTA' : 'TALK TO A SPECIALIST'}</span>
-              </button>
-            </motion.div>
+              </motion.button>
+            </div>
           </div>
 
         </div>
@@ -1013,48 +1086,25 @@ export default function App() {
               <div>
                 {/* Header */}
                 <div className="flex items-center justify-between pb-8 border-b border-white/5 mb-8">
-                  {/* Elegant corporate monogram with neon bottom border inside mobile drawer */}
-                  <div className="relative w-20 h-11 flex flex-col items-center justify-center pb-1.5 select-none">
-                    <div className="w-full h-full flex items-center justify-center overflow-hidden">
-                      <svg viewBox="0 0 160 102" className="w-[85%] h-[85%]" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                          <linearGradient id="goldGradMenu" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#FFFFFF" />
-                            <stop offset="30%" stopColor="#fefbf2" />
-                            <stop offset="70%" stopColor="#e8c96c" />
-                            <stop offset="100%" stopColor="#caaf59" />
-                          </linearGradient>
-                          <filter id="dropGlowMenu" x="-10%" y="-10%" width="130%" height="130%">
-                            <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.75"/>
-                          </filter>
-                        </defs>
-                        <g filter="url(#dropGlowMenu)" className="pointer-events-none">
-                          <text 
-                            x="24" 
-                            y="80" 
-                            fontFamily="'Playfair Display', 'Didot', 'Georgia', serif" 
-                            fontSize="84" 
-                            fontWeight="600" 
-                            fill="url(#goldGradMenu)"
-                          >
-                            D
-                          </text>
-                          <text 
-                            x="76" 
-                            y="85" 
-                            fontFamily="'Playfair Display', 'Didot', 'Georgia', serif" 
-                            fontSize="84" 
-                            fontWeight="500" 
-                            fontStyle="italic"
-                            fill="url(#goldGradMenu)"
-                          >
-                            G
-                          </text>
-                        </g>
-                      </svg>
-                    </div>
-                    {/* Thin neon bottom flare matching image 2 and request */}
-                    <div className="absolute bottom-0 w-12 h-[1px] bg-[#d4af37] shadow-[0_1px_6px_rgba(212,175,55,0.85)]" />
+                  {/* Elegant Logo Image "logo-superior" inside mobile drawer, matching navbar style with floating animation */}
+                  <div className="relative flex items-center justify-center select-none">
+                    {/* Subtle minimalist golden background aura */}
+                    <div className="absolute w-14 h-7 bg-[#d4af37]/8 rounded-full filter blur-xl -z-10 pointer-events-none opacity-80" />
+                    <motion.div
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="flex items-center justify-center"
+                    >
+                      <img 
+                        src={logoSuperior} 
+                        alt="Logo Superior" 
+                        className="w-24 h-14 object-contain select-none filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.55)] drop-shadow-[0_0_4px_rgba(255,255,255,0.2)] brightness-110 saturate-[1.05]"
+                      />
+                    </motion.div>
                   </div>
                   <button 
                     onClick={() => setIsMenuOpen(false)}
@@ -1129,6 +1179,20 @@ export default function App() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* 8. FLOATING WHATSAPP BUTTON (Highly visible, nicely proportioned, bottom-right) */}
+      <div className="fixed bottom-6 right-6 z-40 flex items-center justify-center">
+        <a 
+          href="https://wa.me/5562982223911" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-[#25D366] text-white rounded-full shadow-[0_4px_16px_rgba(37,211,102,0.4)] hover:shadow-[0_6px_22px_rgba(37,211,102,0.65)] hover:bg-[#20BA5A] hover:scale-110 active:scale-95 transition-all duration-300 group"
+          title={lang === 'pt' ? 'Falar no WhatsApp' : 'Chat on WhatsApp'}
+          id="whatsapp-floating-button"
+        >
+          <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 fill-white text-[#25D366] group-hover:text-[#20BA5A] transition-colors" />
+        </a>
+      </div>
 
     </div>
   );
