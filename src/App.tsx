@@ -165,7 +165,7 @@ export default function App() {
             src={advogadosFoto} 
             alt="Advocacia Dogimar Gomes dos Santos" 
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-[center_12%] sm:object-[center_14%] md:object-[center_16%] lg:object-[center_18%] brightness-[0.72] contrast-[1.08]"
+            className="w-full h-full object-cover object-[center_16%] sm:object-[center_18%] md:object-[center_20%] lg:object-[center_22%] xl:object-[center_24%] brightness-[0.72] contrast-[1.08] transition-all duration-300"
           />
           {/* Subtle overlay so text remains perfectly readable while making photo extremely clear */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14]/75 via-[#0A0D14]/12 to-[#0A0D14]" />
@@ -256,6 +256,8 @@ export default function App() {
               </div>
             </a>
 
+
+
             {/* Hamburger white toggle menu trigger */}
             <button 
               onClick={() => setIsMenuOpen(true)}
@@ -272,90 +274,144 @@ export default function App() {
         </div>
 
         {/* HERO CENTRAL BRAND BOX AREA - HOUSES MAIN SLOGANS (LOGO REPLACED AND TEXT RE-POSITIONED BELOW FACE LINE) */}
-        <div className="max-w-4xl mx-auto px-6 pt-[36vh] sm:pt-[40vh] md:pt-[44vh] lg:pt-[46vh] pb-24 flex flex-col items-center justify-center text-center relative z-10 select-none w-full">
+        <div className="max-w-4xl mx-auto px-6 pt-[60vh] sm:pt-[63vh] md:pt-[65vh] lg:pt-[68vh] xl:pt-[70vh] pb-24 flex flex-col items-center justify-center text-center relative z-10 select-none w-full">
           
-          {/* Spacer of identical dimensions to keep central text positions exactly unchanged while removing the monogram box */}
-          <div className="h-26 sm:h-30 mb-10 w-full pointer-events-none" />
-
-          {/* Main Display Headline name */}
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+          {/* Re-add the gorgeous gold-framed DG Logo Box exactly like the example image (now customized to only have a bottom border with soft gold neon glow) */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="font-serif text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.2em] sm:tracking-[0.25em] text-[#faf6e8] leading-tight mb-2 select-text uppercase font-semibold"
+            className="relative w-56 sm:w-64 h-36 sm:h-42 border-b-2 border-[#d4af37]/80 rounded-[1px] flex items-center justify-center bg-black/45 backdrop-blur-xs mb-8 select-none shadow-[0_10px_25px_-5px_rgba(212,175,55,0.25)]"
           >
-            DOGIMAR GOMES DOS SANTOS
-          </motion.h1>
-
-          {/* Subtle sub head */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-            className="font-sans text-[10px] sm:text-xs text-amber-500 uppercase tracking-[0.3em] font-bold mb-8 select-text"
-          >
-            {lang === 'pt' ? 'ADVOCACIA E CONSULTORIA JURÍDICA' : 'LAW & LEGAL CONSULTING'}
-          </motion.p>
-
-          {/* Diamond Line element separator */}
-          <motion.div 
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 1, delay: 0.45 }}
-            className="w-full max-w-sm h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/65 to-transparent flex items-center justify-center mb-8 relative"
-          >
-            <div className="bg-[#0A0D14]/90 px-3 py-0.5 rounded text-amber-500 text-xs translate-y-[-0.5px]">
-              ◇
+            {/* Elegant lens flare / star glowing highlight in center of the bottom border */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 flex items-center justify-center">
+              <div className="w-12 h-[2px] bg-gradient-to-r from-transparent via-[#d4af37] to-transparent" />
+              <div className="absolute w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_12px_6px_rgba(255,255,255,0.85),0_0_4px_2px_rgba(212,175,55,0.9)]" />
             </div>
+
+            {/* SVG containing the premium interlocking DG letters */}
+            <svg viewBox="0 0 160 102" className="w-[82%] h-[82%] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="goldGradCentralHero" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#FFFFFF" />
+                  <stop offset="35%" stopColor="#fefbf2" />
+                  <stop offset="75%" stopColor="#e8c96c" />
+                  <stop offset="100%" stopColor="#caaf59" />
+                </linearGradient>
+                <filter id="dropGlowCentralHero" x="-10%" y="-10%" width="130%" height="130%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.75"/>
+                </filter>
+              </defs>
+              <g filter="url(#dropGlowCentralHero)">
+                {/* Letter D */}
+                <text 
+                  x="20" 
+                  y="81" 
+                  fontFamily="'Cormorant Garamond', 'Playfair Display', serif" 
+                  fontSize="92" 
+                  fontWeight="600" 
+                  fill="url(#goldGradCentralHero)"
+                >
+                  D
+                </text>
+                {/* Letter G (Italicized and starting right where D ends) */}
+                <text 
+                  x="74" 
+                  y="86" 
+                  fontFamily="'Cormorant Garamond', 'Playfair Display', serif" 
+                  fontSize="92" 
+                  fontWeight="500" 
+                  fontStyle="italic"
+                  fill="url(#goldGradCentralHero)"
+                >
+                  G
+                </text>
+              </g>
+            </svg>
           </motion.div>
 
-          {/* Excelencia | Tradicao | Confianca alignment */}
-          <motion.p 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
-            className="font-sans text-[10.5px] sm:text-xs text-[#d1c3a7] tracking-[0.35em] sm:tracking-[0.45em] font-semibold uppercase mb-10 text-center"
-          >
-            {lang === 'pt' ? (
-              <>EXCELÊNCIA <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRADIÇÃO <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> CONFIANÇA</>
-            ) : (
-              <>EXCELLENCE <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRADITION <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRUST</>
-            )}
-          </motion.p>
-
-          {/* Beautiful text: Há mais de 27 anos defendendo direitos com excelência... */}
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 0.65 }}
-            className="font-serif text-[#ebe3cd] text-base sm:text-lg lg:text-xl font-light italic leading-relaxed max-w-2xl mb-12 select-text"
-          >
-            {lang === 'pt' ? (
-              <>
-                Há mais de <strong className="font-bold text-amber-400 not-italic">27 anos</strong> defendendo direitos com excelência e dedicação.
-              </>
-            ) : (
-              <>
-                For over <strong className="font-bold text-amber-400 not-italic">27 years</strong> defending rights with excellence and dedication.
-              </>
-            )}
-          </motion.p>
-
-          {/* Premium clear button CTA with balance scale symbol */}
-          <motion.div 
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col items-center"
-          >
-            <button 
-              onClick={() => setIsModalOpen(true)}
-              className="px-8 sm:px-10 py-5 bg-transparent border border-[#d4af37]/80 hover:bg-[#d4af37]/10 text-[#d4af37] font-sans font-medium text-xs sm:text-sm uppercase tracking-[0.22em] transition-all duration-300 rounded shadow-[0_4px_25px_rgba(212,175,55,0.03)] flex items-center gap-3 active:scale-95 cursor-pointer font-bold hover:shadow-[0_4px_35px_rgba(212,175,55,0.12)] hover:border-[#d4af37]"
+          {/* Grouped hero content container for tighter, adjustable spacing as requested by the user */}
+          <div className="flex flex-col items-center justify-center text-center w-full max-w-3xl mx-auto mt-2">
+            {/* Main Display Headline name */}
+            <motion.h1 
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.15 }}
+              className="font-serif text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.2em] sm:tracking-[0.25em] text-[#faf6e8] leading-tight mb-2 select-text uppercase font-semibold"
             >
-              <Scale className="w-5 h-5 text-[#d4af37]" />
-              <span>{lang === 'pt' ? 'FALAR COM UM ESPECIALISTA' : 'TALK TO A SPECIALIST'}</span>
-            </button>
-          </motion.div>
+              DOGIMAR GOMES DOS SANTOS
+            </motion.h1>
+
+            {/* Subtle sub head */}
+            <motion.p 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.35 }}
+              className="font-sans text-[10px] sm:text-xs text-amber-500 uppercase tracking-[0.3em] font-bold mb-4 select-text"
+            >
+              {lang === 'pt' ? 'ADVOCACIA E CONSULTORIA JURÍDICA' : 'LAW & LEGAL CONSULTING'}
+            </motion.p>
+
+            {/* Diamond Line element separator */}
+            <motion.div 
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ duration: 1, delay: 0.45 }}
+              className="w-full max-w-sm h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/65 to-transparent flex items-center justify-center mb-4 relative"
+            >
+              <div className="bg-[#0A0D14]/90 px-3 py-0.5 rounded text-amber-500 text-xs translate-y-[-0.5px]">
+                ◇
+              </div>
+            </motion.div>
+
+            {/* Excelencia | Tradicao | Confianca alignment */}
+            <motion.p 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.55 }}
+              className="font-sans text-[10.5px] sm:text-xs text-[#d1c3a7] tracking-[0.35em] sm:tracking-[0.45em] font-semibold uppercase mb-5 text-center"
+            >
+              {lang === 'pt' ? (
+                <>EXCELÊNCIA <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRADIÇÃO <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> CONFIANÇA</>
+              ) : (
+                <>EXCELLENCE <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRADITION <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRUST</>
+              )}
+            </motion.p>
+
+            {/* Beautiful text: Há mais de 27 anos defendendo direitos com excelência... */}
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, delay: 0.65 }}
+              className="font-serif text-[#ebe3cd] text-base sm:text-lg lg:text-xl font-light italic leading-relaxed max-w-2xl mb-7 select-text"
+            >
+              {lang === 'pt' ? (
+                <>
+                  Há mais de <strong className="font-bold text-amber-400 not-italic">27 anos</strong> defendendo direitos com excelência e dedicação.
+                </>
+              ) : (
+                <>
+                  For over <strong className="font-bold text-amber-400 not-italic">27 years</strong> defending rights with excellence and dedication.
+                </>
+              )}
+            </motion.p>
+
+            {/* Premium clear button CTA with balance scale symbol */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="flex flex-col items-center"
+            >
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="px-8 sm:px-10 py-4.5 bg-transparent border border-[#d4af37]/80 hover:bg-[#d4af37]/10 text-[#d4af37] font-sans font-medium text-xs sm:text-sm uppercase tracking-[0.22em] transition-all duration-300 rounded shadow-[0_4px_25px_rgba(212,175,55,0.03)] flex items-center gap-3 active:scale-95 cursor-pointer font-bold hover:shadow-[0_4px_35px_rgba(212,175,55,0.12)] hover:border-[#d4af37]"
+              >
+                <Scale className="w-5 h-5 text-[#d4af37]" />
+                <span>{lang === 'pt' ? 'FALAR COM UM ESPECIALISTA' : 'TALK TO A SPECIALIST'}</span>
+              </button>
+            </motion.div>
+          </div>
 
         </div>
 
