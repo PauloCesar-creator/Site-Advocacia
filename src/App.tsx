@@ -174,11 +174,11 @@ export default function App() {
             src={advogadoMobile} 
             alt="Advocacia Dogimar Gomes dos Santos" 
             referrerPolicy="no-referrer"
-            className="block sm:hidden w-full h-full object-cover object-center brightness-[0.72] contrast-[1.08] transition-all duration-300"
+            className="block sm:hidden w-full h-full object-cover object-center brightness-[0.88] contrast-[1.04] transition-all duration-300"
           />
           {/* Subtle overlay so text remains perfectly readable while making photo extremely clear */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14]/75 via-[#0A0D14]/12 to-[#0A0D14]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,#0A0D14_85%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14]/60 via-[#0A0D14]/10 to-[#0A0D14]/90 sm:from-[#0A0D14]/75 sm:via-[#0A0D14]/12 sm:to-[#0A0D14]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,#0A0D14_98%)] sm:bg-[radial-gradient(ellipse_at_center,transparent_35%,#0A0D14_85%)]" />
         </div>
 
         {/* FLOATING NAVBAR STRUCTURE - FLOATS AT THE TOP */}
