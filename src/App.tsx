@@ -21,7 +21,6 @@ import {
 } from 'lucide-react';
 import { Language, translations } from './types';
 import advogadosFoto from './assets/images/advogados-foto.jpeg';
-import advogadoMobile from './assets/images/advogado-mobile.png';
 import logoSuperior from './assets/images/logo-superior.png';
 import logoCentro from './assets/images/logo-centro.png';
 
@@ -139,10 +138,26 @@ export default function App() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API request
+    // Prepare data for the professional WhatsApp message dispatch
+    const whatsappPhone = "5562982223911";
+    const textMessage = `⚖️ *Solicitação de Agendamento - Dogimar Advocacia*\n\n` +
+      `👤 *Nome:* ${formData.name}\n` +
+      `📞 *Telefone:* ${formData.phone}\n` +
+      `🪪 *CPF:* ${formData.cpf}\n` +
+      `📝 *Assunto:* ${formData.subject}\n\n` +
+      `📥 _Enviado automaticamente pelo formulário de agendamento online._`;
+    
+    const encodedText = encodeURIComponent(textMessage);
+    const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodedText}`;
+
+    // Simulate API request and trigger external WhatsApp redirection safely
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
+      
+      // Open in a new tab safely
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      
       setFormData({
         name: '',
         phone: '',
@@ -164,19 +179,12 @@ export default function App() {
         
         {/* Background Image Container with Deep Premium Vignette Overlay - Highly visible lawyers */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
-          {/* Desktop background image */}
+          {/* Responsive background image */}
           <img 
             src={advogadosFoto} 
             alt="Advocacia Dogimar Gomes dos Santos" 
             referrerPolicy="no-referrer"
-            className="hidden sm:block w-full h-full object-cover object-[center_18%] md:object-[center_12%] lg:object-[center_14%] xl:object-[center_16%] brightness-[0.72] contrast-[1.08] transition-all duration-300"
-          />
-          {/* Mobile-specific background image */}
-          <img 
-            src={advogadoMobile} 
-            alt="Advocacia Dogimar Gomes dos Santos" 
-            referrerPolicy="no-referrer"
-            className="block sm:hidden w-full h-full object-cover object-center brightness-[0.88] contrast-[1.04] transition-all duration-300"
+            className="w-full h-full object-cover object-[center_12%] sm:object-[center_18%] md:object-[center_12%] lg:object-[center_14%] xl:object-[center_16%] brightness-[0.72] contrast-[1.08] transition-all duration-300"
           />
           {/* Subtle overlay so text remains perfectly readable while making photo extremely clear */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14]/60 via-[#0A0D14]/10 to-[#0A0D14]/90 sm:from-[#0A0D14]/75 sm:via-[#0A0D14]/12 sm:to-[#0A0D14]" />
@@ -316,108 +324,113 @@ export default function App() {
         </div>
 
         {/* HERO CENTRAL BRAND BOX AREA - HOUSES MAIN SLOGANS (LOGO REPLACED AND TEXT RE-POSITIONED BELOW FACE LINE) */}
-        <div className="max-w-4xl mx-auto px-6 pt-[60vh] sm:pt-[63vh] md:pt-[65vh] lg:pt-[68vh] xl:pt-[70vh] pb-24 flex flex-col items-center justify-center text-center relative z-10 select-none w-full">
+        <div className="max-w-4xl mx-auto px-6 pt-[54vh] xs:pt-[57vh] sm:pt-[60vh] md:pt-[62vh] pb-24 flex flex-col items-center justify-center text-center relative z-10 select-none w-full">
           
-          {/* Central Logo Box represented by "logo-centro" image with a minimalist elegant gold border */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.88, y: -10 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.1 }}
-            transition={{ type: "spring", stiffness: 50, damping: 18, delay: 0.1 }}
-            className="relative w-56 sm:w-64 h-36 sm:h-42 p-4 border border-[#d4af37]/25 rounded-[1px] bg-black/20 backdrop-blur-xs shadow-[0_4px_20px_rgba(0,0,0,0.4),inset_0_0_12px_rgba(212,175,55,0.04)] mb-8 flex items-center justify-center select-none group transition-all duration-500 hover:border-[#d4af37]/45"
-          >
-            <img 
-              src={logoCentro} 
-              alt="Logo Centro" 
-              className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.3)] transition-all duration-500 group-hover:scale-[1.02]"
-            />
-          </motion.div>
-
-          {/* Grouped hero content container for tighter, adjustable spacing as requested by the user */}
-          <div className="flex flex-col items-center justify-center text-center w-full max-w-3xl mx-auto mt-2">
-            {/* Main Display Headline name */}
-            <motion.h1 
-              initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-              className="font-serif text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.2em] sm:tracking-[0.25em] text-[#faf6e8] leading-tight mb-2 select-text uppercase font-semibold"
-            >
-              DOGIMAR GOMES DOS SANTOS
-            </motion.h1>
-
-            {/* Subtle sub head */}
-            <motion.p 
-              initial={{ opacity: 0, y: -20, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ duration: 0.95, ease: "easeOut", delay: 0.4 }}
-              className="font-sans text-[10px] sm:text-xs text-amber-500 uppercase tracking-[0.3em] font-bold mb-4 select-text"
-            >
-              {lang === 'pt' ? 'ADVOCACIA E CONSULTORIA JURÍDICA' : 'LAW & LEGAL CONSULTING'}
-            </motion.p>
-
-            {/* Diamond Line element separator */}
+          {/* Group wrapper for both the elements to ensure unified containment and custom spacing */}
+          <div className="flex flex-col items-center justify-center w-full gap-0 select-none">
+            
+            {/* Central Logo Box represented by "logo-centro" image with a minimalist elegant gold border */}
             <motion.div 
-              initial={{ opacity: 0, scaleX: 0 }}
-              whileInView={{ opacity: 1, scaleX: 1 }}
+              initial={{ opacity: 0, scale: 0.88, y: -10 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: false, amount: 0.1 }}
-              transition={{ duration: 1, delay: 0.45 }}
-              className="w-full max-w-sm h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/65 to-transparent flex items-center justify-center mb-4 relative"
+              transition={{ type: "spring", stiffness: 50, damping: 18, delay: 0.1 }}
+              className="relative w-40 xs:w-44 sm:w-48 h-26 xs:h-28 sm:h-32 p-3 border border-[#d4af37]/25 rounded-[1px] bg-black/20 backdrop-blur-xs shadow-[0_4px_20px_rgba(0,0,0,0.4),inset_0_0_12px_rgba(212,175,55,0.04)] mb-0 sm:mb-0.5 flex items-center justify-center select-none group transition-all duration-500 hover:border-[#d4af37]/45"
             >
-              <div className="bg-[#0A0D14]/90 px-3 py-0.5 rounded text-amber-500 text-xs translate-y-[-0.5px]">
-                ◇
-              </div>
+              <img 
+                src={logoCentro} 
+                alt="Logo Centro" 
+                className="w-11/12 h-11/12 object-contain filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.3)] transition-all duration-500 group-hover:scale-[1.02]"
+              />
             </motion.div>
 
-            {/* Excelencia | Tradicao | Confianca alignment */}
-            <motion.p 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-              className="font-sans text-[10.5px] sm:text-xs text-[#d1c3a7] tracking-[0.35em] sm:tracking-[0.45em] font-semibold uppercase mb-5 text-center"
-            >
-              {lang === 'pt' ? (
-                <>EXCELÊNCIA <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRADIÇÃO <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> CONFIANÇA</>
-              ) : (
-                <>EXCELLENCE <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRADITION <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRUST</>
-              )}
-            </motion.p>
-
-            {/* Beautiful text: Há mais de 27 anos defendendo direitos com excelência... */}
-            <motion.p 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
-              className="font-serif text-[#ebe3cd] text-base sm:text-lg lg:text-xl font-light italic leading-relaxed max-w-2xl mb-7 select-text"
-            >
-              {lang === 'pt' ? (
-                <>
-                  Há mais de <strong className="font-bold text-amber-400 not-italic">27 anos</strong> defendendo direitos com excelência e dedicação.
-                </>
-              ) : (
-                <>
-                  For over <strong className="font-bold text-amber-400 not-italic">27 years</strong> defending rights with excellence and dedication.
-                </>
-              )}
-            </motion.p>
-
-            {/* Premium clear button CTA with balance scale symbol */}
-            <div className="flex flex-col items-center">
-              <motion.button 
-                initial={{ opacity: 0, scale: 0.85, y: 15 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            {/* Grouped hero content container for tighter, adjustable spacing as requested by the user */}
+            <div className="flex flex-col items-center justify-center text-center w-full max-w-3xl mx-auto mt-0">
+              {/* Main Display Headline name */}
+              <motion.h1 
+                initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: false, amount: 0.1 }}
-                transition={{ type: "spring", stiffness: 70, damping: 15, delay: 0.75 }}
-                onClick={() => setIsModalOpen(true)}
-                className="px-8 sm:px-10 py-4.5 bg-transparent border border-[#d4af37]/80 hover:bg-[#d4af37]/10 text-[#d4af37] font-sans font-medium text-xs sm:text-sm uppercase tracking-[0.22em] transition-all duration-300 rounded shadow-[0_4px_25px_rgba(212,175,55,0.03)] flex items-center gap-3 active:scale-95 cursor-pointer font-bold hover:shadow-[0_4px_35px_rgba(212,175,55,0.12)] hover:border-[#d4af37]"
+                transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+                className="font-serif text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.2em] sm:tracking-[0.25em] text-[#faf6e8] leading-tight mb-2 select-text uppercase font-semibold"
               >
-                <Scale className="w-5 h-5 text-[#d4af37]" />
-                <span>{lang === 'pt' ? 'FALAR COM UM ESPECIALISTA' : 'TALK TO A SPECIALIST'}</span>
-              </motion.button>
+                DOGIMAR GOMES DOS SANTOS
+              </motion.h1>
+
+              {/* Subtle sub head */}
+              <motion.p 
+                initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.1 }}
+                transition={{ duration: 0.95, ease: "easeOut", delay: 0.4 }}
+                className="font-sans text-[10px] sm:text-xs text-amber-500 uppercase tracking-[0.3em] font-bold mb-4 select-text"
+              >
+                {lang === 'pt' ? 'ADVOCACIA E CONSULTORIA JURÍDICA' : 'LAW & LEGAL CONSULTING'}
+              </motion.p>
+
+              {/* Diamond Line element separator */}
+              <motion.div 
+                initial={{ opacity: 0, scaleX: 0 }}
+                whileInView={{ opacity: 1, scaleX: 1 }}
+                viewport={{ once: false, amount: 0.1 }}
+                transition={{ duration: 1, delay: 0.45 }}
+                className="w-full max-w-sm h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/65 to-transparent flex items-center justify-center mb-4 relative"
+              >
+                <div className="bg-[#0A0D14]/90 px-3 py-0.5 rounded text-amber-500 text-xs translate-y-[-0.5px]">
+                  ◇
+                </div>
+              </motion.div>
+
+              {/* Excelencia | Tradicao | Confianca alignment */}
+              <motion.p 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, amount: 0.1 }}
+                transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
+                className="font-sans text-[10.5px] sm:text-xs text-[#d1c3a7] tracking-[0.35em] sm:tracking-[0.45em] font-semibold uppercase mb-5 text-center"
+              >
+                {lang === 'pt' ? (
+                  <>EXCELÊNCIA <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRADIÇÃO <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> CONFIANÇA</>
+                ) : (
+                  <>EXCELLENCE <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRADITION <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRUST</>
+                )}
+              </motion.p>
+
+              {/* Beautiful text: Há mais de 27 anos defendendo direitos com excelência... */}
+              <motion.p 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.1 }}
+                transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
+                className="font-serif text-[#ebe3cd] text-base sm:text-lg lg:text-xl font-light italic leading-relaxed max-w-2xl mb-7 select-text"
+              >
+                {lang === 'pt' ? (
+                  <>
+                    Há mais de <strong className="font-bold text-amber-400 not-italic">27 anos</strong> defendendo direitos com excelência e dedicação.
+                  </>
+                ) : (
+                  <>
+                    For over <strong className="font-bold text-amber-400 not-italic">27 years</strong> defending rights with excellence and dedication.
+                  </>
+                )}
+              </motion.p>
+
+              {/* Premium clear button CTA with balance scale symbol */}
+              <div className="flex flex-col items-center w-full">
+                <motion.button 
+                  initial={{ opacity: 0, scale: 0.85, y: 15 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.1 }}
+                  transition={{ type: "spring", stiffness: 70, damping: 15, delay: 0.75 }}
+                  onClick={() => setIsModalOpen(true)}
+                  className="px-5 sm:px-6 py-3.5 sm:py-4 bg-transparent border border-[#d4af37]/80 hover:bg-[#d4af37]/10 text-[#d4af37] font-sans font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 rounded shadow-[0_4px_20px_rgba(212,175,55,0.03)] flex items-center justify-center gap-2.5 active:scale-95 cursor-pointer hover:shadow-[0_4px_30px_rgba(212,175,55,0.12)] hover:border-[#d4af37] w-fit max-w-[260px] sm:max-w-xs mx-auto"
+                >
+                  <Scale className="w-4 h-4 text-[#d4af37]" />
+                  <span>{lang === 'pt' ? 'FALAR COM UM ESPECIALISTA' : 'TALK TO A SPECIALIST'}</span>
+                </motion.button>
+              </div>
             </div>
+
           </div>
 
         </div>
@@ -1180,18 +1193,31 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* 8. FLOATING WHATSAPP BUTTON (Highly visible, nicely proportioned, bottom-right) */}
+      {/* 8. FLOATING WHATSAPP BUTTON (Directs user to the "Agendar Consulta" form system with elegant official styling) */}
       <div className="fixed bottom-6 right-6 z-40 flex items-center justify-center">
-        <a 
-          href="https://wa.me/5562982223911" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-[#25D366] text-white rounded-full shadow-[0_4px_16px_rgba(37,211,102,0.4)] hover:shadow-[0_6px_22px_rgba(37,211,102,0.65)] hover:bg-[#20BA5A] hover:scale-110 active:scale-95 transition-all duration-300 group"
-          title={lang === 'pt' ? 'Falar no WhatsApp' : 'Chat on WhatsApp'}
+        <button 
+          onClick={() => setIsModalOpen(true)}
+          className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-[#25D366] text-white rounded-full shadow-[0_4px_16px_rgba(37,211,102,0.4)] hover:shadow-[0_6px_22px_rgba(37,211,102,0.65)] hover:bg-[#20BA5A] hover:scale-110 active:scale-95 transition-all duration-300 group cursor-pointer"
+          title={lang === 'pt' ? 'Agendar Consulta via WhatsApp' : 'Book Consultation via WhatsApp'}
           id="whatsapp-floating-button"
         >
-          <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 fill-white text-[#25D366] group-hover:text-[#20BA5A] transition-colors" />
-        </a>
+          <svg 
+            className="w-7 h-7 sm:w-8 sm:h-8 group-hover:scale-105 transition-transform" 
+            viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* White speech bubble background wrapper */}
+            <path 
+              fill="#FFFFFF" 
+              d="M12.004 2c-5.51 0-9.993 4.483-9.993 9.993 0 1.761.458 3.479 1.329 4.987l-1.411 5.15 5.271-1.385c1.451.79 3.09 1.208 4.804 1.208 5.51 0 9.993-4.483 9.993-9.993C21.997 6.483 17.514 2 12.004 2z" 
+            />
+            {/* Original WhatsApp brand green phone logo inside */}
+            <path 
+              fill="#25D366" 
+              d="M16.945 14.542c-.225-.113-1.328-.656-1.533-.73-.205-.075-.353-.112-.503.112-.149.225-.578.73-.709.88-.13.15-.261.169-.486.056-.225-.113-.949-.35-1.808-1.117-.668-.596-1.12-1.332-1.251-1.558-.131-.225-.014-.347.098-.459.102-.101.225-.262.338-.393.112-.131.15-.225.225-.375.075-.15.037-.281-.019-.393-.056-.113-.503-1.213-.69-1.662-.181-.437-.367-.377-.503-.385-.13-.006-.28-.007-.43-.007-.15 0-.393.056-.599.28-.206.225-.786.769-.786 1.874 0 1.106.804 2.175.917 2.325.113.15 1.582 2.415 3.832 3.385.535.23 1.042.414 1.4.527.537.171 1.025.147 1.411.089.43-.064 1.329-.543 1.515-1.066.187-.524.187-.973.131-1.066-.056-.093-.206-.15-.43-.262z" 
+            />
+          </svg>
+        </button>
       </div>
 
     </div>
