@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { Language, translations } from './types';
 import advogadosFoto from './assets/images/advogados-foto.jpeg';
+import advogadoMobile from './assets/images/advogado-mobile.png';
 import logoImg from './assets/images/logo.png';
 
 interface Office {
@@ -161,11 +162,19 @@ export default function App() {
         
         {/* Background Image Container with Deep Premium Vignette Overlay - Highly visible lawyers */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
+          {/* Desktop background image */}
           <img 
             src={advogadosFoto} 
             alt="Advocacia Dogimar Gomes dos Santos" 
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-[center_16%] sm:object-[center_18%] md:object-[center_20%] lg:object-[center_22%] xl:object-[center_24%] brightness-[0.72] contrast-[1.08] transition-all duration-300"
+            className="hidden sm:block w-full h-full object-cover object-[center_18%] md:object-[center_12%] lg:object-[center_14%] xl:object-[center_16%] brightness-[0.72] contrast-[1.08] transition-all duration-300"
+          />
+          {/* Mobile-specific background image */}
+          <img 
+            src={advogadoMobile} 
+            alt="Advocacia Dogimar Gomes dos Santos" 
+            referrerPolicy="no-referrer"
+            className="block sm:hidden w-full h-full object-cover object-center brightness-[0.72] contrast-[1.08] transition-all duration-300"
           />
           {/* Subtle overlay so text remains perfectly readable while making photo extremely clear */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14]/75 via-[#0A0D14]/12 to-[#0A0D14]" />
@@ -445,8 +454,14 @@ export default function App() {
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             
-            {/* Left Block: Complete set of 6 paragraphs with full unmodified reading structure */}
-            <div className="lg:col-span-8 space-y-6">
+            {/* Left Block: Complete set of 6 paragraphs with full unmodified reading structure with smooth scroll trigger */}
+            <motion.div 
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="lg:col-span-8 space-y-6"
+            >
               
               <div className="flex flex-col mb-6">
                 <span className="text-xs uppercase tracking-[0.3em] text-[#15408C] font-bold mb-2 block font-sans">
@@ -471,7 +486,7 @@ export default function App() {
                 {lang === 'pt' ? (
                   <>
                     <p>
-                      Há mais de 27 anos, o escritório <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> atua com compromisso, dedicação e excelência na defesa dos direitos da população de Anápolis e região.
+                      Há mais de 27 anos, o escritório <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> atua com compromisso, dedicação e excelência na defense dos direitos da população de Anápolis e região.
                     </p>
                     <p>
                       Nossa história foi construída através da confiança de clientes que encontraram em nosso trabalho um atendimento sério, humanizado e especializado, sempre buscando soluções eficientes para cada situação.
@@ -513,10 +528,16 @@ export default function App() {
                 )}
               </div>
 
-            </div>
+            </motion.div>
 
-            {/* Right Block: OAB legal credentials and members lists */}
-            <div className="lg:col-span-4 lg:sticky lg:top-24 bg-white border border-slate-200/80 rounded-xl p-6 shadow-[0_12px_40px_rgba(0,0,0,0.03)] border-l-4 border-l-[#15408C]">
+            {/* Right Block: OAB legal credentials and members lists with micro-slide design on scroll */}
+            <motion.div 
+              initial={{ opacity: 0, xl: 10, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.12 }}
+              className="lg:col-span-4 lg:sticky lg:top-24 bg-white border border-slate-200/80 rounded-xl p-6 shadow-[0_12px_40px_rgba(0,0,0,0.03)] border-l-4 border-l-[#15408C]"
+            >
               <h3 className="font-serif text-[10.5px] tracking-[0.25em] uppercase text-[#15408C] mb-6 font-bold border-b border-slate-100 pb-3">
                 {lang === 'pt' ? 'Corpo Jurídico Residente' : 'Active Legal Council'}
               </h3>
@@ -558,17 +579,21 @@ export default function App() {
                   {lang === 'pt' ? 'SOLICITAR CONSULTA' : 'REQUEST CONSULTATION'}
                 </button>
               </div>
-            </div>
+            </motion.div>
 
           </div>
 
         </div>
       </section>
 
-      {/* 3. KEY METADATA SUMMARY STICKY GRID BAR */}
+      {/* 3. KEY METADATA SUMMARY STICKY GRID BAR WITH SCROLL ANIMATIONS */}
       <section className="grid grid-cols-1 md:grid-cols-3 border-b border-slate-200 bg-white overflow-hidden">
         
-        <button 
+        <motion.button 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           onClick={() => {
             const el = document.getElementById('unidades');
             el?.scrollIntoView({ behavior: 'smooth' });
@@ -581,7 +606,7 @@ export default function App() {
           <div className="flex items-center justify-between w-full mb-1.5">
             <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#15408C] font-semibold flex items-center gap-1.5 transition-colors font-bold">
               {lang === 'pt' ? 'Unidades em Goiás' : 'Offices in Goiás'} 
-              <span className="text-[10px] bg-blue-100/80 text-[#15408C] px-2 py-0.5 rounded-full font-sans font-bold leading-none">6</span>
+              <span className="text-[10px] bg-blue-105 text-[#15408C] px-2 py-0.5 rounded-full font-sans font-bold leading-none">6</span>
             </p>
             {/* Call to action arrow that slides on hover */}
             <span className="text-[10px] uppercase tracking-[0.15em] text-[#15408C]/80 group-hover:text-[#15408C] group-hover:translate-x-1 transition-all duration-300 font-sans font-semibold">
@@ -591,15 +616,21 @@ export default function App() {
           <p className="text-sm font-light text-slate-600 font-sans tracking-wide leading-relaxed group-hover:text-slate-900 transition-colors pr-6">
             {lang === 'pt' 
               ? 'Anápolis, Goiânia, Águas Lindas, Ceres, Jaraguá e Abadiânia' 
-              : 'Anápolis, Goiânia, Águas Lindas, Ceres, Jaraguá & Abadiânia'}
+               : 'Anápolis, Goiânia, Águas Lindas, Ceres, Jaraguá & Abadiânia'}
           </p>
-        </button>
+        </motion.button>
 
-        <div className="px-8 sm:px-12 py-8 border-r border-slate-150 flex flex-col justify-center text-left">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.08 }}
+          className="px-8 sm:px-12 py-8 border-r border-slate-150 flex flex-col justify-center text-left"
+        >
           <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#15408C] mb-1.5 font-bold">
             {lang === 'pt' ? 'Atendimento Direto' : 'Direct Support'}
           </p>
-          <p className="text-sm font-medium text-slate-705 font-mono tracking-wide">
+          <p className="text-sm font-medium text-slate-700 font-mono tracking-wide">
             (62) 9 8222-3911 / 3321-4895
           </p>
           <a 
@@ -611,16 +642,22 @@ export default function App() {
             <Instagram className="w-3.5 h-3.5" />
             <span>Instagram</span>
           </a>
-        </div>
+        </motion.div>
 
-        <div className="px-8 sm:px-12 py-8 flex flex-col justify-center text-left">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.16 }}
+          className="px-8 sm:px-12 py-8 flex flex-col justify-center text-left"
+        >
           <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#15408C] mb-1.5 font-bold">
             {lang === 'pt' ? 'Áreas Principais' : 'Core Disciplines'}
           </p>
           <p className="text-sm font-light text-slate-600 font-sans tracking-wide leading-relaxed">
             {lang === 'pt' ? 'Previdenciário, trabalhista, civil e agrário' : 'Social security, labor, civil and agrarian law'}
           </p>
-        </div>
+        </motion.div>
 
       </section>
 
