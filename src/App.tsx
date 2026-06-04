@@ -184,7 +184,11 @@ export default function App() {
             src={advogadosFoto} 
             alt="Advocacia Dogimar Gomes dos Santos" 
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-[center_12%] sm:object-[center_18%] md:object-[center_12%] lg:object-[center_14%] xl:object-[center_16%] brightness-[0.72] contrast-[1.08] transition-all duration-300"
+            className="w-full h-[130vh] xs:h-[70vh] sm:h-full object-cover object-[center_12%] sm:object-[center_18%] md:object-[center_12%] lg:object-[center_14%] xl:object-[center_16%] brightness-[0.72] contrast-[1.08] transition-all duration-300"
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 45%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 45%, transparent 100%)'
+            }}
           />
           {/* Subtle overlay so text remains perfectly readable while making photo extremely clear */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14]/60 via-[#0A0D14]/10 to-[#0A0D14]/90 sm:from-[#0A0D14]/75 sm:via-[#0A0D14]/12 sm:to-[#0A0D14]" />
