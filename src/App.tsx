@@ -138,14 +138,15 @@ export default function App() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Prepare data for the professional WhatsApp message dispatch
+    // Prepare data for the professional WhatsApp message dispatch containing only the case summary
     const whatsappPhone = "5562982223911";
-    const textMessage = `⚖️ *Solicitação de Agendamento - Dogimar Advocacia*\n\n` +
-      `👤 *Nome:* ${formData.name}\n` +
-      `📞 *Telefone:* ${formData.phone}\n` +
-      `🪪 *CPF:* ${formData.cpf}\n` +
-      `📝 *Assunto:* ${formData.subject}\n\n` +
-      `📥 _Enviado automaticamente pelo formulário de agendamento online._`;
+    const textMessage = lang === 'pt'
+      ? `⚖️ *Dogimar Gomes dos Santos - Entre em Contato*\n\n` +
+        `📝 *Resumo do Caso:*\n${formData.subject}\n\n` +
+        `📥 _Enviado via formulário de contato do site._`
+      : `⚖️ *Dogimar Gomes dos Santos - Get in Touch*\n\n` +
+        `📝 *Case Summary:*\n${formData.subject}\n\n` +
+        `📥 _Sent via website contact form._`;
     
     const encodedText = encodeURIComponent(textMessage);
     const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodedText}`;
@@ -284,28 +285,28 @@ export default function App() {
               <nav className="hidden md:flex items-center gap-6 lg:gap-8">
                 <button 
                   onClick={() => document.getElementById('historia')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="font-serif text-sm tracking-wide text-slate-350 hover:text-amber-400 hover:scale-105 transition-all duration-300 cursor-pointer text-left font-medium"
+                  className="font-sans text-[11px] uppercase tracking-[0.2em] font-medium text-slate-300 hover:text-[#d4af37] transition-all duration-300 cursor-pointer text-left"
                 >
                   {lang === 'pt' ? 'Nossa História' : 'Our Story'}
                 </button>
 
                 <button 
                   onClick={() => document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="font-serif text-sm tracking-wide text-slate-350 hover:text-amber-400 hover:scale-105 transition-all duration-300 cursor-pointer text-left font-medium"
+                  className="font-sans text-[11px] uppercase tracking-[0.2em] font-medium text-slate-300 hover:text-[#d4af37] transition-all duration-300 cursor-pointer text-left"
                 >
                   {lang === 'pt' ? 'Atuação & Valores' : 'Practice & Values'}
                 </button>
 
                 <button 
                   onClick={() => document.getElementById('unidades')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="font-serif text-sm tracking-wide text-slate-350 hover:text-amber-400 hover:scale-105 transition-all duration-300 cursor-pointer text-left font-medium"
+                  className="font-sans text-[11px] uppercase tracking-[0.2em] font-medium text-slate-300 hover:text-[#d4af37] transition-all duration-300 cursor-pointer text-left"
                 >
                   {lang === 'pt' ? 'Nossos Escritórios' : 'Our Branches'}
                 </button>
 
                 <button 
                   onClick={() => setIsModalOpen(true)}
-                  className="font-serif text-sm tracking-wide text-amber-500 hover:text-amber-400 hover:scale-105 transition-all duration-300 font-bold cursor-pointer text-left"
+                  className="font-sans text-[10.5px] uppercase tracking-[0.2em] font-semibold text-[#d4af37] border border-[#d4af37]/30 bg-[#d4af37]/5 hover:bg-[#d4af37]/15 hover:border-[#d4af37] transition-all duration-300 cursor-pointer text-center px-4.5 py-2.5 rounded shadow-[0_0_15px_rgba(212,175,55,0.04)]"
                 >
                   {lang === 'pt' ? 'Agendar Consulta' : 'Book Appointment'}
                 </button>
@@ -328,7 +329,7 @@ export default function App() {
         </div>
 
         {/* HERO CENTRAL BRAND BOX AREA - HOUSES MAIN SLOGANS (LOGO REPLACED AND TEXT RE-POSITIONED BELOW FACE LINE) */}
-        <div className="max-w-4xl mx-auto px-6 pt-[54vh] xs:pt-[57vh] sm:pt-[60vh] md:pt-[62vh] pb-24 flex flex-col items-center justify-center text-center relative z-10 select-none w-full">
+        <div className="max-w-4xl mx-auto px-6 pt-[54vh] xs:pt-[57vh] sm:pt-[60vh] md:pt-[66vh] lg:pt-[70vh] xl:pt-[72vh] pb-24 flex flex-col items-center justify-center text-center relative z-10 select-none w-full">
           
           {/* Group wrapper for both the elements to ensure unified containment and custom spacing */}
           <div className="flex flex-col items-center justify-center w-full gap-0 select-none">
@@ -356,7 +357,7 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: false, amount: 0.1 }}
                 transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-                className="font-serif text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.2em] sm:tracking-[0.25em] text-[#faf6e8] leading-tight mb-2 select-text uppercase font-semibold"
+                className="font-serif text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.2em] sm:tracking-[0.25em] text-[#faf6e8] leading-tight mb-2 md:mb-1 select-text uppercase font-semibold"
               >
                 DOGIMAR GOMES DOS SANTOS
               </motion.h1>
@@ -367,7 +368,7 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: false, amount: 0.1 }}
                 transition={{ duration: 0.95, ease: "easeOut", delay: 0.4 }}
-                className="font-sans text-[10px] sm:text-xs text-amber-500 uppercase tracking-[0.3em] font-bold mb-4 select-text"
+                className="font-sans text-[10px] sm:text-xs text-amber-500 uppercase tracking-[0.3em] font-bold mb-4 md:mb-2 select-text"
               >
                 {lang === 'pt' ? 'ADVOCACIA E CONSULTORIA JURÍDICA' : 'LAW & LEGAL CONSULTING'}
               </motion.p>
@@ -378,7 +379,7 @@ export default function App() {
                 whileInView={{ opacity: 1, scaleX: 1 }}
                 viewport={{ once: false, amount: 0.1 }}
                 transition={{ duration: 1, delay: 0.45 }}
-                className="w-full max-w-sm h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/65 to-transparent flex items-center justify-center mb-4 relative"
+                className="w-full max-w-sm h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/65 to-transparent flex items-center justify-center mb-4 md:mb-1.5 relative"
               >
                 <div className="bg-[#0A0D14]/90 px-3 py-0.5 rounded text-amber-500 text-xs translate-y-[-0.5px]">
                   ◇
@@ -391,7 +392,7 @@ export default function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false, amount: 0.1 }}
                 transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-                className="font-sans text-[10.5px] sm:text-xs text-[#d1c3a7] tracking-[0.35em] sm:tracking-[0.45em] font-semibold uppercase mb-5 text-center"
+                className="font-sans text-[10.5px] sm:text-xs text-[#d1c3a7] tracking-[0.35em] sm:tracking-[0.45em] font-semibold uppercase mb-5 md:mb-2.5 text-center"
               >
                 {lang === 'pt' ? (
                   <>EXCELÊNCIA <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> TRADIÇÃO <span className="text-[#d4af37]/50 mx-2 sm:mx-4">|</span> CONFIANÇA</>
@@ -406,7 +407,7 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.1 }}
                 transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
-                className="font-serif text-[#ebe3cd] text-base sm:text-lg lg:text-xl font-light italic leading-relaxed max-w-2xl mb-7 select-text"
+                className="font-serif text-[#ebe3cd] text-base sm:text-lg lg:text-xl font-light italic leading-relaxed max-w-2xl mb-7 md:mb-4 select-text"
               >
                 {lang === 'pt' ? (
                   <>
@@ -496,48 +497,47 @@ export default function App() {
                 <div className="w-16 h-[3px] bg-[#15408C] mt-4" />
               </div>
 
-              {/* Original unmodified text blocks */}
               <div className="space-y-5 text-slate-700 font-sans text-[13.5px] sm:text-[14.5px] leading-relaxed font-light text-left">
                 {lang === 'pt' ? (
                   <>
                     <p>
-                      Há mais de 27 anos, o escritório <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> atua com compromisso, dedicação e excelência na defesa dos direitos da população de todo o estado de Goiás e Online por todo país.
+                      Há mais de <strong className="font-bold text-[#15408C]">27 anos</strong>, o escritório <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> constrói uma trajetória pautada pela excelência jurídica, ética profissional e dedicação à defesa dos direitos de seus clientes. Com atuação consolidada em todo o estado de Goiás e atendimento online em âmbito nacional, nossa história é marcada pela confiança de milhares de pessoas que encontraram em nosso trabalho segurança, acolhimento e soluções jurídicas eficazes.
                     </p>
                     <p>
-                      Nossa história foi construída através da confiança de clientes que encontraram em nosso trabalho um atendimento sério, humanizado e especializado, sempre buscando soluções eficientes para cada situação.
+                      Reconhecido por sua atuação de destaque no <strong className="font-bold text-[#15408C]">Direito Previdenciário</strong>, o escritório dedica-se à defesa de segurados que tiveram benefícios negados pelo INSS, além de prestar assessoria especializada em aposentadorias, pensão por morte, salário-maternidade, auxílio-doença, auxílio-acidente, BPC/LOAS e demais benefícios previdenciários.
                     </p>
                     <p>
-                      Somos referência na atuação em <strong className="font-bold text-[#15408C]">Direito Previdenciário</strong>, auxiliando diariamente pessoas que tiveram benefícios negados pelo INSS, além de atuar em demandas envolvendo aposentadorias, pensão por morte, salário-maternidade, auxílio-doença, auxílio-acidente, BPC/LOAS e demais benefícios previdenciários.
+                      Nossa sólida experiência também se estende às áreas <strong className="font-bold text-[#15408C]">Trabalhista, Cível e Agrária</strong>, sempre com uma atuação técnica, estratégica e personalizada, voltada à proteção dos interesses e direitos de cada cliente.
                     </p>
                     <p>
-                      Também prestamos atendimento especializado nas áreas <strong className="font-bold text-[#15408C]">trabalhista, cível e agrária</strong>, sempre prezando pela qualidade dos serviços prestados, responsabilidade profissional e dedicação em cada causa assumida.
+                      Ao longo de mais de duas décadas, compreendemos que cada demanda jurídica representa muito mais do que um processo. Por trás de cada causa existe uma história de vida, desafios, expectativas e direitos que merecem ser respeitados e defendidos com responsabilidade e seriedade.
                     </p>
                     <p>
-                      Ao longo desses anos, entendemos que cada processo representa muito mais do que documentos e procedimentos jurídicos. Por trás de cada demanda existe uma história, uma família e direitos que precisam ser respeitados e defendidos.
+                      Por isso, seguimos firmes em nosso propósito de oferecer um <strong className="font-bold text-[#15408C]">atendimento humanizado</strong>, transparente e próximo, aliado à experiência de quem conhece profundamente o Direito e entende a importância de cada conquista para aqueles que depositam sua confiança em nosso escritório.
                     </p>
-                    <p>
-                      Por isso, seguimos atuando com transparência, experiência e compromisso, buscando oferecer segurança jurídica e um atendimento próximo para cada cliente que deposita sua confiança em nosso escritório.
+                    <p className="font-medium text-slate-800">
+                      Mais do que advogados, somos parceiros na busca por justiça, segurança e dignidade.
                     </p>
                   </>
                 ) : (
                   <>
                     <p>
-                      For over 27 years, <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> law firm has acted with commitment, dedication, and excellence in defending the rights of the people of Anápolis and its surrounding region.
+                      For over <strong className="font-bold text-[#15408C]">27 years</strong>, <strong className="font-bold text-[#15408C]">Dogimar Gomes dos Santos</strong> law firm has built a solid path guided by legal excellence, professional ethics, and absolute dedication to defending its clients' rights. With an established presence across the state of Goiás and nationwide online services, our history is defined by the trust of thousands of people who found safety, warm reception, and highly effective legal solutions in our work.
                     </p>
                     <p>
-                      Our history was built upon the trust of clients who found in our work a serious, humanized, and highly specialized representation, always looking for efficient solutions in every single scenario.
+                      Renowned for our outstanding practice in <strong className="font-bold text-[#15408C]">Social Security Law</strong>, we are committed to defending insured individuals whose benefits were denied by the INSS, additionally offering expert assistance in retirements, pensions, survivor benefits, maternity allowance, disability aid, accident allowance, BPC/LOAS, and other welfare benefits.
                     </p>
                     <p>
-                      We are a benchmark in <strong className="font-bold text-[#15408C]">Social Security Law</strong>, helping individuals daily whose benefits were denied or rejected by the INSS, additionally handling retirements, survivor pensions, maternity allowances, disability benefits, accident aid, BPC/LOAS, and other social welfare demands.
+                      Our strong expertise also covers <strong className="font-bold text-[#15408C]">Labor, Civil, and Agrarian Law</strong>, delivering technical, strategic, and tailormade representation focused on protecting each client's specific interests and rights.
                     </p>
                     <p>
-                      We also deliver specialized legal advice in the <strong className="font-bold text-[#15408C]">labor, civil, and agrarian</strong> fields, always valuing the premium quality of our practices, professional responsibility, and devotion to every case we take on.
+                      Throughout more than two decades, we came to realize that each legal matter is far more than a file. Behind every case is a real lifetime story, challenges, dreams, and rights that must be valued and defended with high accountability and solemnity.
                     </p>
                     <p>
-                      Throughout these years, we have come to understand that each lawsuit represents far more than just documents and bureaucratic court proceedings. Behind each claim is a real story, a family, and fundamental rights that demand respect and defense.
+                      Therefore, we stand firm in our mission to render <strong className="font-bold text-[#15408C]">humanized consulting</strong>, full transparency, and close customer service, paired with the experience of professionals who hold deep legal knowledge and recognize the weight of every progress for our clients.
                     </p>
-                    <p>
-                      Thus, we continue to serve with transparency, solid experience, and absolute commitment, aiming to provide outstanding legal security and highly personal guidance to every client who places their trust in our firm.
+                    <p className="font-medium text-slate-800">
+                      More than attorneys, we are true partners in search of justice, safety, and dignity.
                     </p>
                   </>
                 )}
@@ -949,94 +949,40 @@ export default function App() {
                       {t.modal.subtitle}
                     </p>
 
-                    <form onSubmit={handleFormSubmit} className="space-y-4">
+                    <form onSubmit={handleFormSubmit} className="space-y-5">
                       
                       <div>
-                        <label className="block text-[11px] uppercase tracking-wider text-slate-600 mb-1.5 font-bold">
-                          {t.modal.name} *
-                        </label>
-                        <input 
-                          type="text" 
-                          name="name"
-                          required
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          placeholder={lang === 'pt' ? 'Ex: Robert Silva' : 'e.g. Robert Smith'}
-                          className="w-full bg-white border border-slate-200 focus:border-[#15408C] text-slate-800 placeholder-slate-400 px-4 py-2.5 rounded text-sm outline-none transition-colors shadow-sm"
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-[11px] uppercase tracking-wider text-slate-600 mb-1.5 font-bold">
-                            {t.modal.phone} *
-                          </label>
-                          <input 
-                            type="tel" 
-                            name="phone"
-                            required
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            placeholder="(62) 98222-3911"
-                            className="w-full bg-white border border-slate-200 focus:border-[#15408C] text-slate-800 placeholder-slate-400 px-4 py-2.5 rounded text-sm outline-none transition-colors shadow-sm font-sans"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[11px] uppercase tracking-wider text-slate-600 mb-1.5 font-bold">
-                            {t.modal.cpf} *
-                          </label>
-                          <input 
-                            type="text" 
-                            name="cpf"
-                            required
-                            value={formData.cpf}
-                            onChange={(e) => {
-                              let val = e.target.value.replace(/\D/g, "");
-                              if (val.length > 11) val = val.slice(0, 11);
-                              if (val.length > 9) {
-                                val = val.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-                              } else if (val.length > 6) {
-                                val = val.replace(/(\d{3})(\d{3})(\d{0,3})/, "$1.$2.$3");
-                              } else if (val.length > 3) {
-                                val = val.replace(/(\d{3})(\d{0,3})/, "$1.$2");
-                              }
-                              setFormData(prev => ({ ...prev, cpf: val }));
-                            }}
-                            placeholder="000.000.000-00"
-                            className="w-full bg-white border border-slate-200 focus:border-[#15408C] text-slate-800 placeholder-slate-400 px-4 py-2.5 rounded text-sm outline-none transition-colors shadow-sm font-mono"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-[11px] uppercase tracking-wider text-slate-600 mb-1.5 font-bold">
+                        <label className="block text-[11px] uppercase tracking-wider text-slate-600 mb-2 font-bold">
                           {t.modal.subject} *
                         </label>
                         <textarea 
                           name="subject"
                           required
-                          rows={3}
+                          rows={6}
                           value={formData.subject}
                           onChange={handleInputChange}
-                          placeholder={lang === 'pt' ? 'Ex: Gostaria de agendar uma consulta sobre aposentadoria...' : 'e.g. I would like to schedule a consultation regarding retirement...'}
-                          className="w-full bg-white border border-slate-200 focus:border-[#15408C] text-slate-800 placeholder-slate-400 px-4 py-2.5 rounded text-sm outline-none transition-colors resize-none shadow-sm"
+                          placeholder={lang === 'pt' ? 'Descreva resumidamente os detalhes ou dúvidas sobre o seu caso para podermos lhe ajudar melhor...' : 'Briefly describe your case details or questions so we can help you better...'}
+                          className="w-full bg-white border border-slate-200 focus:border-[#15408C] text-slate-800 placeholder-slate-450 px-4 py-3 rounded text-sm outline-none transition-colors resize-none shadow-sm font-sans leading-relaxed"
                         />
                       </div>
 
-                      <div className="flex items-center gap-2 text-[11px] text-slate-500 mb-2">
-                        <Lock className="w-3.5 h-3.5 text-[#15408C]/70" />
-                        <span>{lang === 'pt' ? 'Suas informações estão 100% criptografadas e seguras.' : 'Your information is 100% encrypted and secure.'}</span>
+                      <div className="flex items-center gap-2 text-[11.5px] text-slate-500 mb-2">
+                        <Lock className="w-3.5 h-3.5 text-[#15408C]/70 shrink-0" />
+                        <span>{lang === 'pt' ? 'Sua mensagem está protegida e segura.' : 'Your message is fully protected and secure.'}</span>
                       </div>
 
                       <button 
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-3.5 bg-[#15408C] hover:bg-[#11316B] text-white text-xs tracking-[0.15em] font-bold uppercase transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50 cursor-pointer rounded"
+                        className="w-full py-3.5 bg-[#15408C] hover:bg-[#11316B] text-white text-xs tracking-[0.15em] font-bold uppercase transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2.5 active:scale-98 disabled:opacity-50 cursor-pointer rounded"
                       >
                         {isSubmitting ? (
                           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         ) : (
-                          <span>{t.modal.submit}</span>
+                          <>
+                            <MessageCircle className="w-4 h-4 text-[#25D366]" />
+                            <span>{t.modal.submit}</span>
+                          </>
                         )}
                       </button>
 
@@ -1138,7 +1084,7 @@ export default function App() {
                       setIsMenuOpen(false);
                       document.getElementById('historia')?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="text-left font-serif text-lg text-slate-300 hover:text-amber-400 transition-colors py-1 cursor-pointer"
+                    className="text-left font-sans text-[13px] uppercase tracking-[0.2em] font-medium text-slate-300 hover:text-[#d4af37] transition-colors py-1 cursor-pointer"
                   >
                     {lang === 'pt' ? 'Nossa História' : 'Our Story'}
                   </button>
@@ -1148,7 +1094,7 @@ export default function App() {
                       setIsMenuOpen(false);
                       document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="text-left font-serif text-lg text-slate-300 hover:text-amber-400 transition-colors py-1 cursor-pointer"
+                    className="text-left font-sans text-[13px] uppercase tracking-[0.2em] font-medium text-slate-300 hover:text-[#d4af37] transition-colors py-1 cursor-pointer"
                   >
                     {lang === 'pt' ? 'Atuação & Valores' : 'Practice & Values'}
                   </button>
@@ -1158,7 +1104,7 @@ export default function App() {
                       setIsMenuOpen(false);
                       document.getElementById('unidades')?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="text-left font-serif text-lg text-slate-300 hover:text-amber-400 transition-colors py-1 cursor-pointer"
+                    className="text-left font-sans text-[13px] uppercase tracking-[0.2em] font-medium text-slate-300 hover:text-[#d4af37] transition-colors py-1 cursor-pointer"
                   >
                     {lang === 'pt' ? 'Nossos Escritórios' : 'Our Branches'}
                   </button>
@@ -1168,7 +1114,7 @@ export default function App() {
                       setIsMenuOpen(false);
                       setIsModalOpen(true);
                     }}
-                    className="text-left font-serif text-lg text-amber-500 hover:text-amber-400 transition-colors py-1 font-bold cursor-pointer"
+                    className="text-center font-sans text-xs uppercase tracking-[0.18em] font-semibold text-[#d4af37] border border-[#d4af37]/45 bg-[#d4af37]/5 hover:bg-[#d4af37]/15 hover:border-[#d4af37] transition-all duration-300 py-3.5 px-4 rounded w-full cursor-pointer mt-2"
                   >
                     {lang === 'pt' ? 'Agendar Consulta' : 'Book Appointment'}
                   </button>
